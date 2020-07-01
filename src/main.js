@@ -6,16 +6,16 @@ function MainOnLoad() {
   ctx = cvs.getContext('2d');
   // Start Programs
   ctx.font = "bold 12pt monospace";
-  EventLoop();
+  requestAnimationFrame(EventLoop);
 };
 // Final Init
 cvs = id_get("canvas");
 window.onload = MainOnLoad;
 // Keyboards
 window.addEventListener("keydown", (ev) =>
-  {Keys[ev.keyCode] = true}, false);
+  {Keys[ev.code] = true}, false);
 window.addEventListener("keyup", (ev) =>
-  {Keys[ev.keyCode] = false}, false);
+  {Keys[ev.code] = false}, false);
 // Mouse Cavnas
 cvs.addEventListener("click", (ev) =>
   Clicks.push(ev), false);
@@ -25,3 +25,5 @@ cvs.addEventListener("contextmenu",
     Clicks.push(ev);
     return false;
 }, false);
+// Extra divs
+let mats = id_get("mats-list");
