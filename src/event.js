@@ -21,7 +21,8 @@ function ResetSize() {
   cvs.setAttribute('width', dpi * (c_w = fn('width')));
 }
 let tSize = 50;
-y0 = 0; x0 = 0;
+x0 = 12 * tSize;
+y0 = 16 * tSize;
 function EventLoop() {
   ResetSize();
   DispatchInput();
