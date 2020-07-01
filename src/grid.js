@@ -45,7 +45,11 @@ function DrawGrid() {
       ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(chY && chX) {
         LastPos = [Last.button, xL, yL];
-        if (mats) UpdateColor(position);
+        // Update in Tools
+        if (mats && !LastPos[0])
+          UpdateColor(position);
+        if (ents && LastPos[0])
+          UpdateObject(position);
       }
       if(LastPos[1] == xL && LastPos[2] == yL)
         ctx.strokeText(LastPos[0] ?

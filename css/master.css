@@ -11,19 +11,23 @@ main {
   z-index: 2;
 }
 
-#mats-list {
-  padding: 8pt;
+#lists {
   position: fixed;
-  list-style: none;
-  background: wheat;
   right: 4pt;
 }
 
-#mats-list > li {
+.edits {
+  padding: 8pt;
+  list-style: none;
+  background: wheat;
+
+}
+
+.edits > li {
   cursor: pointer;
 }
 
-#mat-sel {
+#mat-sel, #ent-sel {
   font-weight: bold;
 }
 

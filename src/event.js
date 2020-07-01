@@ -5,7 +5,7 @@ var fps = 30,
 var Tick = 1, tTimeLast = 0;
 function EventLoop(millisecs) {
   let LastTick = Tick;
-  if(millisecs > 100 + tTimeLast) {
+  if(millisecs > 115 + tTimeLast) {
     tTimeLast = millisecs; Tick++;
   }; ResetSize();
   // Otherwise

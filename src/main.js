@@ -27,3 +27,4 @@ cvs.addEventListener("contextmenu",
 }, false);
 // Extra divs
 let mats = id_get("mats-list");
+let ents = id_get("ents-list");
