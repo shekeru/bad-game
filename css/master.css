@@ -4,6 +4,21 @@ html, body {
   margin: 0px;
 }
 
+main {
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 2;
+}
+
+#mats-list {
+  padding: 8pt;
+  position: fixed;
+  list-style: none;
+  background: beige;
+  right: 0px;
+}
+
 canvas {
     margin: auto;
     display: flex;

@@ -15,20 +15,23 @@ function NormOffset(val) {
   return -val % 50 - 50;
 }
 function ResetSize() {
-  let fn = (wh) => Number(getComputedStyle(cvs)
+  const fn = (wh) => Number(getComputedStyle(cvs)
     .getPropertyValue(wh).slice(0, -2));
   cvs.setAttribute('height', dpi * (c_h = fn('height')));
   cvs.setAttribute('width', dpi * (c_w = fn('width')));
 }
 let tSize = 50;
-x0 = 12 * tSize;
-y0 = 16 * tSize;
+x0 = 0 * tSize;
+y0 = 0 * tSize;
 function EventLoop() {
   ResetSize();
   DispatchInput();
-  // Grid
+  if(Clicks.length)
+    Last = Clicks.shift();
+  // Mouse Clicks & Grid
   ctx.beginPath();
-  for (y = NormOffset(y0); y <= c_h; y += tSize)
+  for (y = NormOffset(y0); y <= c_h; y += tSize) {
+    let chY = Last && y <= Last.y && Last.y < y + tSize;
     for (x = NormOffset(x0); x <= c_w; x += tSize) {
       ctx.strokeRect(x, y, tSize, tSize);
       let xL = Math.floor(x / tSize) + Math.ceil(x0 / tSize);
@@ -36,13 +39,17 @@ function EventLoop() {
       ctx.fillStyle = "white";
       // Map Fill
       try {
-        let ColorType = Map1.data[yL][xL];
-        let c = Map1.lookup[ColorType];
-        ctx.fillStyle = `rgb(${c[0]},${c[1]},${c[2]})`;
+        let Code = Map1.data[`${yL},${xL}`];
+        ctx.fillStyle = Map1.refs[Code].hex;
       } catch {
       }; ctx.fillRect(x, y, tSize, tSize);
+      // Check click X
+      let chX = x <= Last.x && Last.x < x + tSize;
       // Debug text
-      ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
+      ctx.strokeText(`${xL}, ${xL}`, x + 3, y+10);
+      // Check Mouse Click
+      ctx.strokeText(`${chY && chX}`, x + 3, y+22);
+    }
   }
   ctx.stroke();
   // Continue
