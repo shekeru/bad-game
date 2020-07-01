@@ -15,8 +15,16 @@ main {
   padding: 8pt;
   position: fixed;
   list-style: none;
-  background: beige;
-  right: 0px;
+  background: wheat;
+  right: 4pt;
+}
+
+#mats-list > li {
+  cursor: pointer;
+}
+
+#mat-sel {
+  font-weight: bold;
 }
 
 canvas {
