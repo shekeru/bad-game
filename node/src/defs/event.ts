@@ -1,7 +1,7 @@
 import * as Draw from './grid'
 import * as Input from './input'
 import {Ctx} from '../main'
-var FPS = 45,
+var FPS = 30,
   lastMs = 0,
 frameQty = 0;
 // Event Loop

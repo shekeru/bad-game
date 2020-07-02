@@ -1,3 +1,4 @@
+import {Canvas} from '../main'
 import {Player} from '../world'
 import {Tick} from './event'
 export let SIZE = 50,
@@ -5,36 +6,58 @@ export let SIZE = 50,
   OFFSET_Y = 0 * SIZE;
 export var Keys = {},
   Clicks = []
+// Fixate Camera
+export function UpdateCamera() {
+    OFFSET_Y = Player.Y * SIZE
+      - Math.round(Y_MAX / 2);
+    OFFSET_X = Player.X * SIZE
+      - Math.round(X_MAX / 2);
+};
 // DispatchInput
 export function Dispatch(LastTick){
-  let Factor = 5;
-  if(Keys["KeyW"]) // w
-    OFFSET_Y -= Factor;
-  if(Keys["KeyA"]) // a
-    OFFSET_X -= Factor;
-  if(Keys["KeyS"]) // s
-    OFFSET_Y += Factor;
-  if(Keys["KeyD"]) // d
-    OFFSET_X += Factor;
   // Space Interact
-  if(Keys["Space"]) {
-    // if(Keys["ArrowUp"])
-    //   Player.Interact(0, -1)
-    // if(Keys["ArrowLeft"])
-    //   Player.Interact(-1, 0)
-    // if(Keys["ArrowDown"])
-    //   Player.Interact(0, 1)
-    // if(Keys["ArrowRight"])
-    //   Player.Interact(1, 0)
-  } else if(Tick > LastTick) {
+  if(Tick > LastTick) {
     // PlayerCtl
-    if(Keys["ArrowUp"])
+    if(Keys["KeyW"])
       Player.MoveSafely(0, -1)
-    if(Keys["ArrowLeft"])
+    if(Keys["KeyA"])
       Player.MoveSafely(-1, 0)
-    if(Keys["ArrowDown"])
+    if(Keys["KeyS"])
       Player.MoveSafely(0, 1)
-    if(Keys["ArrowRight"])
+    if(Keys["KeyD"])
       Player.MoveSafely(1, 0)
   }
 }
+// Check Action
+let Dialog = Object()
+let P_Dialog = document
+  .getElementById('dialog')
+// Insertion of Options
+export function PromptOptions(options) {
+  Dialog = <HTMLElement>
+    P_Dialog.cloneNode(true);
+  Dialog.removeAttribute('hidden');
+  let Last = Dialog.children[0]
+  for(let Name in options) {
+    var li = document.createElement('li')
+    li.onclick = () => {
+      Dialog.remove()
+      options[Name]()
+    }; li.innerHTML = Name
+    Dialog.insertBefore(li, Last)
+  }
+  Dialog.prepend();
+  document.getElementById('main')
+    .appendChild(Dialog);
+}
+function GetAction() {
+  if (!Dialog) return;
+}
+// Reset Size Function
+export function ResetSize() {
+  const fn = (wh: string) => Number(getComputedStyle
+    (Canvas).getPropertyValue(wh).slice(0, -2))
+  Canvas.setAttribute('height', `${Y_MAX = fn('height')}`)
+  Canvas.setAttribute('width', `${X_MAX = fn('width')}`)
+}; export let Y_MAX = 0, X_MAX = 0
+document.body.onresize = ResetSize;

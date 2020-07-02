@@ -11,7 +11,7 @@ export class TalkingBarrel {
     this.solid = true
   }
   // Right Click Options
-  Inspect(){
+  Context(){
     return {
       "Talk to Barrel":
         this.Converse,

@@ -4,11 +4,16 @@ html, body {
   margin: 0px;
 }
 
+body > * {
+  position: fixed;
+}
+
 main {
   top: 0;
   left: 0;
   position: fixed;
   z-index: 2;
+  width: 100%;
 }
 
 #lists {
@@ -16,11 +21,22 @@ main {
   right: 4pt;
 }
 
+#dialog {
+  margin: auto;
+  padding: 8pt 8pt 8pt 16pt;
+  width: fit-content;
+  background: white;
+  margin-top: 25vh;
+}
+
+#dialog > li {
+  cursor: pointer;
+}
+
 .edits {
   padding: 8pt;
   list-style: none;
   background: wheat;
-
 }
 
 .edits > li {

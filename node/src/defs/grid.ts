@@ -1,15 +1,16 @@
 import {UpdateObject, UpdateColor} from './tools'
 import {OFFSET_X, OFFSET_Y, SIZE} from './input'
-import {Canvas, Ctx} from '../main'
+import * as Input from './input'
+import {Ctx} from '../main'
 import * as Map from '../world'
 let LastPos = {}
 // Continue
 export function World(Click) {
-  ResetSize();
+  Input.UpdateCamera();
   // Mouse Clicks & Grid
-  for (let y = NormOffset(OFFSET_Y); y <= Y_MAX; y += SIZE) {
+  for (let y = NormOffset(OFFSET_Y); y <= Input.Y_MAX; y += SIZE) {
     let ClickY = Click && y <= Click.y && Click.y < y + SIZE;
-    for (let x = NormOffset(OFFSET_X); x <= X_MAX; x += SIZE) {
+    for (let x = NormOffset(OFFSET_X); x <= Input.X_MAX; x += SIZE) {
       Ctx.strokeRect(x, y, SIZE, SIZE);
       let xL = Math.floor(x / SIZE) + Math.ceil(OFFSET_X / SIZE);
       let yL = Math.floor(y / SIZE) + Math.ceil(OFFSET_Y / SIZE);
@@ -34,15 +35,19 @@ export function World(Click) {
       let ClickX = x <= Click.x && Click.x < x + SIZE;
       //Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
-        LastPos = [xL, yL, Click.button];
+        LastPos = [Click.button, xL, yL];
         // Update in Tools
-        LastPos[2] ?
+        LastPos[0] ?
           UpdateObject(position)
           :UpdateColor(position)
+        // Input Testing
+        let Dyn = Map.Dynamics[position]
+        if(LastPos[0] && Dyn)
+          Input.PromptOptions(Dyn.Context())
       }
-      if(LastPos[0] == xL && LastPos[1] == yL)
-        Ctx.strokeText(LastPos[2] ?
-          "Right Cl" : "Left Cl", x + 3, y+22);
+      // if(LastPos[1] == xL && LastPos[2] == yL)
+      //   Ctx.strokeText(LastPos[0] ?
+      //     "Right Cl" : "Left Cl", x + 3, y+22);
     }
   }
 }
@@ -52,10 +57,3 @@ function NormOffset(val: number) {
     return -val % SIZE - 0;
   return -val % SIZE - SIZE;
 }
-// Reset Size Function
-function ResetSize() {
-  const fn = (wh: string) => Number(getComputedStyle
-    (Canvas).getPropertyValue(wh).slice(0, -2))
-  Canvas.setAttribute('height', `${Y_MAX = fn('height')}`)
-  Canvas.setAttribute('width', `${X_MAX = fn('width')}`)
-}; let Y_MAX = 0, X_MAX = 0
