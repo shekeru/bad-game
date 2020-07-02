@@ -9,7 +9,7 @@ function MainOnLoad() {
   requestAnimationFrame(EventLoop);
 };
 // Final Init
-cvs = id_get("canvas");
+const cvs = id_get("canvas");
 window.onload = MainOnLoad;
 // Keyboards
 window.addEventListener("keydown", (ev) =>
