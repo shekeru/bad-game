@@ -2,16 +2,16 @@ import {EventLoop} from './defs/event'
 import {Keys, Clicks} from './defs/input'
 // Main Functions
 function MainOnLoad() {
-  Ctx.font = "bold 12pt monospace";
-  requestAnimationFrame(EventLoop);
-}; window.onload = MainOnLoad;
+  Ctx.font = "bold 12pt monospace"
+  requestAnimationFrame(EventLoop)
+}; window.onload = MainOnLoad
 // Globals
 export const Canvas = <HTMLCanvasElement>
   document.getElementById("canvas")
 export const Ctx = Canvas.getContext('2d')
 // Keyboards
 window.addEventListener("keydown", (ev) =>
-  {Keys[ev.code] = true})
+  {Keys[ev.code] = Date.now()})
 window.addEventListener("keyup", (ev) =>
   {Keys[ev.code] = false})
 // Mouse Cavnas
@@ -23,3 +23,5 @@ Canvas.addEventListener("contextmenu",
     Clicks.push(ev);
     return false;
 })
+// Tools loading
+import {matList} from './defs/tools'

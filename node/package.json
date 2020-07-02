@@ -15,8 +15,8 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "dev": "nodemon",
     "start": "ts-node server.ts",
+    "start:dev": "webpack-dev-server",
     "build": "webpack -w --mode development"
   }
 }

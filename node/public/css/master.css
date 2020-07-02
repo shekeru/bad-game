@@ -38,3 +38,14 @@ canvas {
     width: 100%;
     height: 100vh;
 }
+
+#log-window {
+  bottom: 0px;
+  height: 24vh;
+  background: rgba(0, 0, 0, 0.25);
+  width: 64vw;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-wrap: normal;
+  padding: 4pt;
+}

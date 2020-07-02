@@ -16,7 +16,17 @@ export function Dispatch(LastTick){
     OFFSET_Y += Factor;
   if(Keys["KeyD"]) // d
     OFFSET_X += Factor;
-  if(Tick > LastTick) {
+  // Space Interact
+  if(Keys["Space"]) {
+    // if(Keys["ArrowUp"])
+    //   Player.Interact(0, -1)
+    // if(Keys["ArrowLeft"])
+    //   Player.Interact(-1, 0)
+    // if(Keys["ArrowDown"])
+    //   Player.Interact(0, 1)
+    // if(Keys["ArrowRight"])
+    //   Player.Interact(1, 0)
+  } else if(Tick > LastTick) {
     // PlayerCtl
     if(Keys["ArrowUp"])
       Player.MoveSafely(0, -1)

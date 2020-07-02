@@ -1,10 +1,14 @@
+import {ImgRefs} from '../world'
+
 export class TalkingBarrel {
-  name: string;
-  src: string;
+  solid: boolean
+  name: string
+  img: any
   // Init
   constructor() {
     this.name = "Talking Barrel"
-    this.src = "barrel.png"
+    this.img = ImgRefs['barrel.png']
+    this.solid = true
   }
   // Right Click Options
   Inspect(){
