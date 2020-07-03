@@ -29,11 +29,12 @@ export function Dispatch(LastTick){
   }
 }
 // Check Action
-let Dialog = Object()
+let Dialog = undefined
 let P_Dialog = document
   .getElementById('dialog')
 // Insertion of Options
-export function PromptOptions(options) {
+export function PromptOptions(options: {[x: string]: () => void;}) {
+  if(Dialog) return;
   Dialog = <HTMLElement>
     P_Dialog.cloneNode(true);
   Dialog.removeAttribute('hidden');
@@ -42,9 +43,13 @@ export function PromptOptions(options) {
     var li = document.createElement('li')
     li.onclick = () => {
       Dialog.remove()
+      Dialog = undefined
       options[Name]()
     }; li.innerHTML = Name
-    Dialog.insertBefore(li, Last)
+    Last.onclick = () => {
+      Dialog.remove()
+      Dialog = undefined
+    }; Dialog.insertBefore(li, Last)
   }
   Dialog.prepend();
   document.getElementById('main')

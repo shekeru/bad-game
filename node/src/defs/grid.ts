@@ -33,7 +33,7 @@ export function World(Click) {
         Ctx.drawImage(Map.Player.img, x, y);
       // Check click X
       let ClickX = x <= Click.x && Click.x < x + SIZE;
-      //Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
+      Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
         LastPos = [Click.button, xL, yL];
         // Update in Tools
