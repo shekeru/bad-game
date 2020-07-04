@@ -10,13 +10,13 @@ export class PlayerStruct extends C_Entity {
     this.X = x; this.Y = y
     // Init Stats
     this.SetStats({
-      [Stat.STR]: 1,
-      [Stat.DEX]: 1,
       [Stat.VIT]: 2
     })
     this.AddGear(Gear.BastardSword)
-    this.AddGear(Gear.LeatherChest)
     this.AddGear(Gear.LeatherGloves)
+    this.AddGear(Gear.LeatherChest)
+    this.AddGear(Gear.LeatherLegs)
+    this.AddGear(Gear.LeatherBoots)
   }
   MoveSafely(a: number, b: number){
     let Pos = `${this.X +a},${this.Y +b}`

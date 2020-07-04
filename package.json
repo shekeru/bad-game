@@ -16,8 +16,8 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "ts-node server.ts",
-    "start:dev": "webpack-dev-server",
+    "start": "npm run server & npm run build",
+    "server": "ts-node server.ts",
     "build": "webpack -w --mode development"
   }
 }

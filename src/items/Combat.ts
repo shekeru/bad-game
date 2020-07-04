@@ -44,7 +44,6 @@ export class C_Entity extends C_Base {
   // Add Gear Stats
   AddGear(Item: Equipment) {
     this.Gear[Item.Slot] = Item
-    console.log(Item)
     for(let Key in Item.Stats) {
       this.Stats[Key] += Item.Stats[Key]
     }
@@ -60,21 +59,26 @@ export class C_Entity extends C_Base {
       * AccuracyCoeff(this.Stats[Stat.DEX]))
     //dmg -= Other.RollStat(Stat.DEF)
     //dmg = Math.max(0, dmg)
-    console.log(Other.name, "has", Other.HP, "hitpoints.")
     console.log(this.name, "deals", dmg, "damage.")
-    Other.HP -= dmg
-    console.log("\n")
+    Other.HP -= dmg;
   }
   StartCombat(Other) {
     this.HP = 250 + 175 *
       this.Stats[Stat.VIT]
     Other.HP = 250 + 175 *
       Other.Stats[Stat.VIT]
-    while(this.HP > 0) {
-      this.SeqCombat(Other);
-      if(Other.HP > 0)
+    while(true) {
+      if(this.HP > 0)
+        this.SeqCombat(Other);
+      else {
+        console.log(Other.Name, "wins with", this.HP, 'hitpoints');
+        console.log("\n"); break;
+      } if(Other.HP > 0)
         Other.SeqCombat(this);
-      else break;
+      else {
+        console.log(this.name, "wins with", this.HP, 'hitpoints');
+        console.log("\n"); break;
+      }
     }
   }
 }
