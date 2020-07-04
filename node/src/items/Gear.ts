@@ -9,27 +9,37 @@ export enum Equip {
   Head, Ring,
 }
 export enum Stat {
-  VIT = 1,
-  ATK, DEF,
+  VIT = 1, DEF,
+  STR, DEX,
 }
 // Gear List
-export let Nothing:Equipment = {
+export const Nothing:Equipment = {
   Name: "Literaly Nothing",
   Slot: 0, Stats: {}
 }
 
-export let BastardSword:Equipment = {
+export const BastardSword:Equipment = {
   Name: "Bastard Sword",
   Slot: Equip.MainHand,
   Stats: {
-    [Stat.ATK]: +1
+    [Stat.STR]: 2,
+    [Stat.DEX]: 1
   }
 }
 
-export let LeatherChest:Equipment = {
+export const LeatherGloves:Equipment = {
+  Name: "Leather Gloves",
+  Slot: Equip.Chest,
+  Stats: {
+    [Stat.DEX]: 2,
+    [Stat.DEF]: 1
+  }
+}
+
+export const LeatherChest:Equipment = {
   Name: "Leather Chest",
   Slot: Equip.Chest,
   Stats: {
-    [Stat.DEF]: +1
+    [Stat.DEF]: 3
   }
 }

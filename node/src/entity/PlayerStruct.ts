@@ -4,18 +4,19 @@ import {Stat} from '../items/Gear'
 import * as Map from '../world'
 
 export class PlayerStruct extends C_Entity {
-  name: string; img: any
   X: number; Y: number
   constructor(x: number, y: number) {
-    super(); this.name = "Player"
-    this.img = Map.ImgRefs['lucy.png'];
+    super("Player", "lucy.png");
     this.X = x; this.Y = y
     // Init Stats
     this.SetStats({
-      [Stat.VIT]: +2
+      [Stat.STR]: 1,
+      [Stat.DEX]: 1,
+      [Stat.VIT]: 2
     })
     this.AddGear(Gear.BastardSword)
     this.AddGear(Gear.LeatherChest)
+    this.AddGear(Gear.LeatherGloves)
   }
   MoveSafely(a: number, b: number){
     let Pos = `${this.X +a},${this.Y +b}`

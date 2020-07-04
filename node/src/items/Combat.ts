@@ -1,4 +1,5 @@
 import {Nothing, Equip, Stat} from '../items/Gear'
+import * as Map from '../world'
 // Types
 type Stats = {
   [k: number]: number
@@ -12,11 +13,19 @@ type Gear = {
   [idx in Equip]: Equipment
 }
 // Classes
-export class C_Entity {
-  Gear: Gear
-  Stats: Stats
-  HP: number
-  constructor() {
+export class C_Base {
+  solid: boolean
+  name: string; img: any
+  constructor(name: string, image: string) {
+    this.name = name; this.solid = true
+    this.img = Map.ImgRefs[image]
+  }
+}
+export class C_Entity extends C_Base {
+  Gear: Gear; Stats: Stats; HP: number
+  // Init Shitfest
+  constructor(name: string, image: string) {
+    super(name, image)
     // Empty Gear
     this.Gear = <Gear> {}
     for(var Key in Equip)
@@ -35,6 +44,7 @@ export class C_Entity {
   // Add Gear Stats
   AddGear(Item: Equipment) {
     this.Gear[Item.Slot] = Item
+    console.log(Item)
     for(let Key in Item.Stats) {
       this.Stats[Key] += Item.Stats[Key]
     }
@@ -42,15 +52,37 @@ export class C_Entity {
   // Roll Attack or Misc
   RollStat(WhichStat: Stat){
     return Math.floor(Math.random()
-      * this.Stats[WhichStat])
+      * this.Stats[WhichStat] * 75)
   }
   // Sequence Combat
   SeqCombat(Other: C_Entity) {
-    let dmg = this.RollStat(Stat.ATK)
-    console.log("You attack with", dmg, "power.")
-    dmg -= Other.RollStat(Stat.DEF)
-    console.log("You deal", dmg, "damage.")
+    let dmg = Math.round(100 * this.Stats[Stat.STR]
+      * AccuracyCoeff(this.Stats[Stat.DEX]))
+    //dmg -= Other.RollStat(Stat.DEF)
+    //dmg = Math.max(0, dmg)
+    console.log(Other.name, "has", Other.HP, "hitpoints.")
+    console.log(this.name, "deals", dmg, "damage.")
     Other.HP -= dmg
-    console.log("The enemy has", Other.HP, "hitpoints.")
+    console.log("\n")
   }
+  StartCombat(Other) {
+    this.HP = 250 + 175 *
+      this.Stats[Stat.VIT]
+    Other.HP = 250 + 175 *
+      Other.Stats[Stat.VIT]
+    while(this.HP > 0) {
+      this.SeqCombat(Other);
+      if(Other.HP > 0)
+        Other.SeqCombat(this);
+      else break;
+    }
+  }
+}
+// Math Functions
+function AccuracyCoeff(dex) {
+  let Rand = 2 * Math.random()
+  return Math.pow(Math.E, -Math.pow
+      (Rand - 2, 2) / 2)
+    / Math.sqrt(2*Math.PI)
+    * (2 +dex/ 20);
 }
