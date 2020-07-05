@@ -1,4 +1,5 @@
 html, body {
+  user-select: none;
   background: black;
   padding: 0px;
   margin: 0px;
@@ -9,6 +10,8 @@ body > * {
 }
 
 ul {
+  cursor: default;
+  user-select: none;
   background: wheat;
   list-style: none;
   padding: 8pt;
@@ -30,11 +33,9 @@ main {
 }
 
 #dialog {
-  margin: auto;
   padding: 8pt 8pt 8pt 16pt;
   width: fit-content;
   background: white;
-  margin-top: 12em;
 }
 
 #dialog > li {
@@ -43,10 +44,6 @@ main {
 
 .edits > li {
   cursor: pointer;
-}
-
-#mat-sel, #ent-sel {
-  font-weight: bold;
 }
 
 .sel_icon {

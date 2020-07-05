@@ -18,3 +18,43 @@
   font-weight: bold;
   text-align: center;
 }
+
+#toolbar > article {
+}
+
+#a_world > ul > li {
+  cursor: pointer;
+}
+
+#mat-sel, #ent-sel {
+  font-weight: bold;
+}
+ /* Inbventory System */
+#a_inv {
+  max-width: 140px;
+  float: right;
+}
+#a_inv > ul
+{
+  margin: auto;
+  align-items: center;
+  max-width: -webkit-fill-available;
+  padding: 6px;
+}
+
+#a_inv > ul > li
+{
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border: 2px inset white;
+    border-radius: 2px;
+
+    display: inline-grid;
+    background: wheat;
+
+}
+
+#a_inv > ul > li > div {
+  background-size: contain;
+}
