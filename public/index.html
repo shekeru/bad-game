@@ -3,17 +3,29 @@
 <head>
   <title>Game</title>
   <link rel="stylesheet" href="css/master.css">
+  <link rel="stylesheet" href="css/toolbar.css">
 </head>
 <body>
   <canvas id="canvas"></canvas>
   <main id = "main" oncontextmenu="return false;">
+    <!-- Dialog Window -->
     <ol id="dialog" hidden>
       <li>Cancel Action</li>
     </ol>
-    <!-- <div>
-      FPS: <span id="fps"></span>
-    </div> -->
-    <section id="log-window">
+    <!-- Interface  -->
+    <section id = "toolbar">
+      <div id = "t_icons">
+      </div>
+    </section>
+    <!-- Todo: Phase out -->
+    <div id ="respawn" hidden>Respawn</div>
+    <section id="lists">
+      <ul id="mats-list" class="edits">
+        <li id="mat-sel">Nothing</li>
+      </ul>
+      <ul id="ents-list" class="edits">
+        <li id="ent-sel">Nothing</li>
+      </ul>
     </section>
   </main>
   <!-- Source Files -->

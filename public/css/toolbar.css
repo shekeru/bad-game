@@ -1,0 +1,20 @@
+#toolbar {
+  color: #1b1b1b;
+  height: 36px;
+  float: right;
+}
+
+#toolbar > div > img {
+  cursor: pointer;
+}
+
+#toolbar > div > img, #toolbar > article {
+  border-radius: 4pt;
+  border: 2px solid white;
+  background: #cea669;
+}
+
+#toolbar > article > div {
+  font-weight: bold;
+  text-align: center;
+}

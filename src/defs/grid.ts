@@ -11,10 +11,10 @@ export function World(Click) {
   for (let y = NormOffset(OFFSET_Y); y <= Input.Y_MAX; y += SIZE) {
     let ClickY = Click && y <= Click.y && Click.y < y + SIZE;
     for (let x = NormOffset(OFFSET_X); x <= Input.X_MAX; x += SIZE) {
-      Ctx.strokeRect(x, y, SIZE, SIZE);
+      Ctx.strokeStyle = "#444"; Ctx.strokeRect(x, y, SIZE, SIZE);
       let xL = Math.floor(x / SIZE) + Math.ceil(OFFSET_X / SIZE);
       let yL = Math.floor(y / SIZE) + Math.ceil(OFFSET_Y / SIZE);
-      Ctx.fillStyle = "black"; let position = `${xL},${yL}`;
+      Ctx.fillStyle = "white"; let position = `${xL},${yL}`;
       // Ground Fill
       try {
         Ctx.fillStyle = Map.GroundMats[Map.Ground[position]].hex;
@@ -22,18 +22,23 @@ export function World(Click) {
       // Layer1 Fill
       try {
         Ctx.drawImage(Map.StaticMats
-          [Map.Statics[position]].img, x, y);
-      } catch {};
+          [Map.Statics[position]].img, x, y)
+      } catch {}
       // Render Dynamics
       try {
-        Ctx.drawImage(Map.Dynamics[position].img, x, y);
-      } catch {};
+        Ctx.globalAlpha = Map.Dynamics[position].alpha
+        Ctx.drawImage(Map.Dynamics[position].img, x, y)
+        Ctx.globalAlpha = 1
+      } catch {}
       // Render Player
-      if(Map.Player.X == xL && Map.Player.Y == yL)
-        Ctx.drawImage(Map.Player.img, x, y);
+      if(Map.Player.X == xL && Map.Player.Y == yL) {
+        Ctx.globalAlpha = Map.Player.alpha
+        Ctx.drawImage(Map.Player.img, x, y)
+        Ctx.globalAlpha = 1
+      }
       // Check click X
       let ClickX = x <= Click.x && Click.x < x + SIZE;
-      Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
+      //Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
         LastPos = [Click.button, xL, yL];
         // Update in Tools
@@ -42,7 +47,9 @@ export function World(Click) {
           :UpdateColor(position)
         // Input Testing
         let Dyn = Map.Dynamics[position]
-        if(LastPos[0] && Dyn)
+        if(LastPos[0] && Dyn && Dyn.alpha == 1
+          && Math.abs(Map.Player.X - xL) <= 1
+          && Math.abs(Map.Player.Y - yL) <= 1)
           Input.PromptOptions(Dyn.Context())
       }
       // if(LastPos[1] == xL && LastPos[2] == yL)

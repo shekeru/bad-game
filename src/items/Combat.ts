@@ -1,7 +1,10 @@
+import {Print} from '../defs/event'
 import {Nothing, Equip, Stat} from '../items/Gear'
 import * as Map from '../world'
+export * from '../items/Stats'
+export * from '../items/Gear'
 // Types
-type Stats = {
+export type Stats = {
   [k: number]: number
 }
 export type Equipment = {
@@ -14,11 +17,22 @@ type Gear = {
 }
 // Classes
 export class C_Base {
-  solid: boolean
+  respawnTime: number
   name: string; img: any
+  solid: boolean; alpha: number
   constructor(name: string, image: string) {
     this.name = name; this.solid = true
     this.img = Map.ImgRefs[image]
+    this.respawnTime = 60
+    this.alpha = 1
+  }
+  EntityDeath() {
+    this.alpha = 0.15
+    this.solid = false
+    setTimeout(() => {
+      this.solid = true
+      this.alpha = 1
+    }, this.respawnTime * 1000)
   }
 }
 export class C_Entity extends C_Base {
@@ -59,27 +73,12 @@ export class C_Entity extends C_Base {
       * AccuracyCoeff(this.Stats[Stat.DEX]))
     //dmg -= Other.RollStat(Stat.DEF)
     //dmg = Math.max(0, dmg)
-    console.log(this.name, "deals", dmg, "damage.")
+    Print(this.name, "deals", dmg, "damage.")
     Other.HP -= dmg;
   }
-  StartCombat(Other) {
-    this.HP = 250 + 175 *
-      this.Stats[Stat.VIT]
-    Other.HP = 250 + 175 *
-      Other.Stats[Stat.VIT]
-    while(true) {
-      if(this.HP > 0)
-        this.SeqCombat(Other);
-      else {
-        console.log(Other.Name, "wins with", this.HP, 'hitpoints');
-        console.log("\n"); break;
-      } if(Other.HP > 0)
-        Other.SeqCombat(this);
-      else {
-        console.log(this.name, "wins with", this.HP, 'hitpoints');
-        console.log("\n"); break;
-      }
-    }
+  RefreshHP() {
+    this.HP = 250 + 175
+      * this.Stats[Stat.VIT]
   }
 }
 // Math Functions

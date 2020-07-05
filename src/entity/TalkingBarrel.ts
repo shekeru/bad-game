@@ -1,28 +1,40 @@
-import {ImgRefs} from '../world'
+import { PromptOptions } from '../defs/input';
+import {Print} from '../defs/event'
+import {C_Entity} from '../items/Combat'
+import {Stat} from '../items/Gear'
+import {Player} from '../world'
 
-export class TalkingBarrel {
-  solid: boolean
-  name: string
-  img: any
+export class TalkingBarrel extends C_Entity {
   // Init
   constructor() {
-    this.name = "Talking Barrel"
-    this.img = ImgRefs['barrel.png']
-    this.solid = true
+    super("Barrel", "barrel.png");
+    this.SetStats({
+      [Stat.VIT]: 99,
+      [Stat.DEX]: 99,
+      [Stat.STR]: 99
+    })
   }
   // Right Click Options
   Context(){
     return {
       "Talk to Barrel":
         this.Converse,
+      "Open Barrel (Combat)":
+        () => {
+          Print("Trying to open the Barrel, you find yourself in Combat...")
+          Player.StartCombat(this)
+      },
       "Examine Barrel":
         this.Examine
     }
   }
   Examine(){
-    console.log("There's someone in the barrel.");
+    Print("There's someone in the barrel.");
   }
   Converse() {
-
+    PromptOptions({
+      "Hello?":
+        () => Print("<Barrel>", "Hello my servant.")
+    })
   }
 }

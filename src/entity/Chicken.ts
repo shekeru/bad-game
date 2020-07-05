@@ -1,3 +1,4 @@
+import {Print} from '../defs/event'
 import {C_Entity} from '../items/Combat'
 import {Player, ImgRefs} from '../world'
 
@@ -16,7 +17,7 @@ export class Chicken extends C_Entity {
     }
   }
   Examine(){
-    console.log("A cute looking hen.");
+    Print("A cute looking hen");
   }
 
 }

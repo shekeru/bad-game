@@ -1,4 +1,6 @@
 import {Equipment} from './Combat'
+import {Stat} from './Stats'
+export * from './Stats'
 // Enums
 export enum Equip {
   MainHand = 1,
@@ -7,10 +9,6 @@ export enum Equip {
   Boots, Gloves,
   Neck, Cape,
   Head, Ring,
-}
-export enum Stat {
-  VIT = 1, DEF,
-  STR, DEX, AGI
 }
 // Gear List
 export const Nothing:Equipment = {

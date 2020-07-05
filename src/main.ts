@@ -3,7 +3,6 @@ import {Keys, Clicks} from './defs/input'
 import * as Input from './defs/input'
 // Main Functions
 function MainOnLoad() {
-  Ctx.font = "bold 12pt monospace"
   requestAnimationFrame(EventLoop)
   Input.ResetSize();
 }; window.onload = MainOnLoad
