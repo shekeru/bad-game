@@ -1,0 +1,6 @@
+C:\code\geimu\protype\TrashRPG\Structures\bin\Debug\Structures.dll
+C:\code\geimu\protype\TrashRPG\Structures\bin\Debug\Structures.pdb
+C:\code\geimu\protype\TrashRPG\Structures\obj\Debug\Structures.csprojAssemblyReference.cache
+C:\code\geimu\protype\TrashRPG\Structures\obj\Debug\Structures.csproj.CoreCompileInputs.cache
+C:\code\geimu\protype\TrashRPG\Structures\obj\Debug\Structures.dll
+C:\code\geimu\protype\TrashRPG\Structures\obj\Debug\Structures.pdb

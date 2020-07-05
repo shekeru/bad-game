@@ -1,5 +1,6 @@
 import {html, elem} from './globals'
 import {Equip, Stat, Stats, StatDict} from './items/Combat'
+import {Inventory} from './items/Inventory'
 import {Player, GroundMats} from './world'
 // Create Interface
 let Toolbars = {
@@ -56,7 +57,9 @@ function InvWindow(){
   list.class = "inventory-table"
   for(let I = 0; I < 28; I++) {
     let li = elem('li', list); let div = elem('div', li)
-    div.style.backgroundImage = "url('/item/Feather.png')"
+    if(Inventory[I])
+      div.style.backgroundImage =
+        `url('/item/${Inventory[I].Item.Src}')`
   }
 }
 // Materials

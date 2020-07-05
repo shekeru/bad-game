@@ -1,3 +1,4 @@
+import * as Inv from '../items/Inventory'
 import {C_Entity} from '../items/Combat'
 import {Player, ImgRefs} from '../world'
 import {Print} from '../globals'
@@ -18,6 +19,11 @@ export class Chicken extends C_Entity {
   }
   Examine(){
     Print("A cute looking hen");
+  }
+  EntityDeath(){
+    Inv.AddItem(Inv.Feather, 2)
+    console.log(Inv.Inventory)
+    super.EntityDeath()
   }
 
 }
