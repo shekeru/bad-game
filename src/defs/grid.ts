@@ -1,11 +1,11 @@
+import { Ctx } from '../globals'
+import * as Map from '../world'
 import {UpdateObject, UpdateColor} from './tools'
 import {OFFSET_X, OFFSET_Y, SIZE} from './input'
 import * as Input from './input'
-import {Ctx} from '../main'
-import * as Map from '../world'
 let LastPos = {}
 // Continue
-export function World(Click) {
+export function DrawWorld(Click) {
   Input.UpdateCamera();
   // Mouse Clicks & Grid
   for (let y = NormOffset(OFFSET_Y); y <= Input.Y_MAX; y += SIZE) {
@@ -50,7 +50,7 @@ export function World(Click) {
         if(LastPos[0] && Dyn && Dyn.alpha == 1
           && Math.abs(Map.Player.X - xL) <= 1
           && Math.abs(Map.Player.Y - yL) <= 1)
-          Input.PromptOptions(Dyn.Context())
+          Input.PromptOptions(Dyn.Context(), Click)
       }
       // if(LastPos[1] == xL && LastPos[2] == yL)
       //   Ctx.strokeText(LastPos[0] ?

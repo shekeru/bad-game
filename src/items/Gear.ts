@@ -4,15 +4,12 @@ export * from './Stats'
 // Enums
 export enum Equip {
   MainHand = 1,
-  OffHand,
-  Chest, Legs,
-  Boots, Gloves,
-  Neck, Cape,
-  Head, Ring,
+  Gloves, Chest,
+  Legs, Boots
 }
 // Gear List
 export const Nothing:Equipment = {
-  Name: "Literaly Nothing",
+  Name: "  ...  ",
   Slot: 0, Stats: {}
 }
 
@@ -35,7 +32,7 @@ export const LeatherChest:Equipment = {
 
 export const LeatherLegs:Equipment = {
   Name: "Leather Legs",
-  Slot: Equip.Chest,
+  Slot: Equip.Legs,
   Stats: {
     [Stat.DEF]: 2,
     [Stat.AGI]: 1
@@ -44,7 +41,7 @@ export const LeatherLegs:Equipment = {
 
 export const LeatherGloves:Equipment = {
   Name: "Leather Gloves",
-  Slot: Equip.Chest,
+  Slot: Equip.Gloves,
   Stats: {
     [Stat.DEX]: 2,
     [Stat.DEF]: 1
@@ -52,8 +49,8 @@ export const LeatherGloves:Equipment = {
 }
 
 export const LeatherBoots:Equipment = {
-  Name: "Leather Legs",
-  Slot: Equip.Chest,
+  Name: "Leather Boots",
+  Slot: Equip.Boots,
   Stats: {
     [Stat.AGI]: 2,
     [Stat.DEF]: 1,

@@ -1,6 +1,6 @@
-import {Canvas} from '../main'
+import {Canvas} from '../globals'
 import {Player} from '../world'
-import {Tick} from './event'
+// Exports
 export let SIZE = 50,
   OFFSET_X = 0 * SIZE,
   OFFSET_Y = 0 * SIZE;
@@ -13,32 +13,43 @@ export function UpdateCamera() {
     OFFSET_X = Player.X * SIZE
       - Math.round(X_MAX / 2);
 };
+// AdvanceTick
+var Tick = 1, tTimeLast = 0;
+export function AdvanceTick(current) {
+  if(current > 125 + tTimeLast) {
+    tTimeLast = current; Tick++;
+    Dispatch(); return true;
+  };
+}
 // DispatchInput
-export function Dispatch(LastTick){
-  // Space Interact
-  if(Tick > LastTick) {
-    // PlayerCtl
-    if(Keys["KeyW"])
-      Player.MoveSafely(0, -1)
-    if(Keys["KeyA"])
-      Player.MoveSafely(-1, 0)
-    if(Keys["KeyS"])
-      Player.MoveSafely(0, 1)
-    if(Keys["KeyD"])
-      Player.MoveSafely(1, 0)
-  }
+function Dispatch(){
+  // PlayerCtl
+  if(Keys["KeyW"])
+    Player.MoveSafely(0, -1)
+  if(Keys["KeyA"])
+    Player.MoveSafely(-1, 0)
+  if(Keys["KeyS"])
+    Player.MoveSafely(0, 1)
+  if(Keys["KeyD"])
+    Player.MoveSafely(1, 0)
 }
 // Check Action
 let Dialog = undefined
 let P_Dialog = document
   .getElementById('dialog')
 // Insertion of Options
-export function PromptOptions(options: {[x: string]: () => void;}) {
+var LastTop = null, LastLeft = null
+export function PromptOptions(options, click?) {
   if(Dialog) return;
   Dialog = <HTMLElement>
     P_Dialog.cloneNode(true);
   Dialog.removeAttribute('hidden');
-  let Last = Dialog.children[0]
+  if(click) {
+    LastTop = click.clientY + "px"
+    LastLeft = click.clientX + "px"
+  } let Last = Dialog.children[0]
+  Dialog.style.marginTop = LastTop
+  Dialog.style.marginLeft = LastLeft
   for(let Name in options) {
     var li = document.createElement('li')
     li.onclick = () => {

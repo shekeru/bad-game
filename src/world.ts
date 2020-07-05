@@ -73,11 +73,8 @@ for(let Code in StaticMats) {
     StaticMats[Code].img = img
 }
 // Dynamic Entities
-import {PlayerStruct} from './entity/PlayerStruct';
 import {TalkingBarrel} from './entity/TalkingBarrel';
 import {Chicken} from './entity/Chicken';
-export let Player = new PlayerStruct();
-
 export let Dynamics = {
   "14,1": new Chicken(),
   "14,3": new Chicken(),
@@ -85,3 +82,6 @@ export let Dynamics = {
   "20,1": new Chicken(),
   "22,3": new TalkingBarrel()
 }
+// Player
+import {PlayerStruct} from './entity/PlayerStruct';
+export let Player = new PlayerStruct();

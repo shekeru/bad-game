@@ -1,6 +1,6 @@
-import {Print} from '../defs/event'
 import {C_Entity} from '../items/Combat'
 import {Player, ImgRefs} from '../world'
+import {Print} from '../globals'
 
 // The 1 everything monster
 export class Chicken extends C_Entity {

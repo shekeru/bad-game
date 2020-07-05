@@ -1,7 +1,6 @@
+import {Print} from '../globals'
 import { PromptOptions } from '../defs/input';
-import {Print} from '../defs/event'
-import {C_Entity} from '../items/Combat'
-import {Stat} from '../items/Gear'
+import {C_Entity, Stat} from '../items/Combat'
 import {Player} from '../world'
 
 export class TalkingBarrel extends C_Entity {
@@ -21,7 +20,7 @@ export class TalkingBarrel extends C_Entity {
         this.Converse,
       "Open Barrel (Combat)":
         () => {
-          Print("Trying to open the Barrel, you find yourself in Combat...")
+          Print("Trying to open the Barrel, you find yourself in Combat")
           Player.StartCombat(this)
       },
       "Examine Barrel":
