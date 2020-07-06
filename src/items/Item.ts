@@ -7,18 +7,19 @@ export enum Equip {
   Gloves, Chest,
   Legs, Boots
 }
+export const Items = []
 // Gear List
 export const Nothing:Item = {
   Id: 0, Name: "  ...  ",
   Src: "", Slot: 0,
   Stats: {}
-}
+}; Items[0] = Nothing
 
 export const Feather:Item = {
   Id: 1, Name: "Feather",
   Src: "Feather.png",
   Stats: {},
-}
+}; Items[1] = Feather
 
 export const BronzeSword:Item = {
   Id: 2, Name: "Bronze Sword",
@@ -28,15 +29,16 @@ export const BronzeSword:Item = {
     [Stat.STR]: 2,
     [Stat.DEX]: 1
   }
-}
+}; Items[2] = BronzeSword
 
-// export const LeatherChest:Equipment = {
-//   Name: "Leather Chest",
-//   Slot: Equip.Chest,
-//   Stats: {
-//     [Stat.DEF]: 3
-//   }
-// }
+export const LeatherChest:Item = {
+  Id: 3, Name: "Leather Chest",
+  Src: "LeatherChest.png",
+  Slot: Equip.Chest,
+  Stats: {
+    [Stat.DEF]: 3
+  }
+}; Items[3] = LeatherChest
 //
 // export const LeatherLegs:Equipment = {
 //   Name: "Leather Legs",

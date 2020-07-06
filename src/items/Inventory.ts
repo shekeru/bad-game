@@ -1,8 +1,12 @@
 import {GetValue, SetValue} from '../globals'
-import {Equip, Stat} from './Item'
+import {Equip, Stat, Items} from './Item'
 import { Item } from './Combat'
-export let Inventory =
-  GetValue('inv', [])
+export let Inventory = GetValue('inv', [])
+// Update Objects
+for(let I in Inventory) {
+  let x = Inventory[I]
+  x.Item = Items[x.Item.Id]
+}
 
 export function AddItem(Item, Amnt) {
   let ItemId = Item.Id

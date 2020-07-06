@@ -24,7 +24,7 @@ export class PlayerStruct extends C_Entity {
     })
     this.AddGear(Item.BronzeSword)
     // this.AddGear(Item.LeatherGloves)
-    // this.AddGear(Item.LeatherChest)
+    this.AddGear(Item.LeatherChest)
     // this.AddGear(Item.LeatherLegs)
     // this.AddGear(Item.LeatherBoots)
   }

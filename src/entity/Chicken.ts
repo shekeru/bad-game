@@ -23,6 +23,7 @@ export class Chicken extends C_Entity {
   }
   EntityDeath(){
     Inv.AddItem(Item.Feather, 5)
+    Inv.AddItem(Item.LeatherChest, 1)
     super.EntityDeath()
   }
 

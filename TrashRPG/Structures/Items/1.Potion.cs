@@ -11,6 +11,6 @@ namespace Structures.Items
         static Potion Self = new Potion();
         string Examine = "Heals for 75 HP.";
         string Name = "Health Potion (I)";
-        int ID = 1;
+        int ID = 1; bool Stacks = false;
     }
 }

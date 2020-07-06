@@ -33,12 +33,11 @@ namespace Structures.Items
     public class Item
     {
         static readonly Item Self;
+        readonly bool Stacks = true;
         readonly string Examine;
         readonly string Name;
         readonly int ID;
-        public void Use(Item trgt) { 
-        
-        }
+        public void Use(Item trgt) {}
         public override bool Equals(Object obj) {
         if (obj == null || !(obj is Item))
             return false; else
