@@ -61,9 +61,10 @@
 }
 
 #a_inv > ul > li > div > div {
+  font-weight: bold;
   position: absolute;
   font-size: 12px;
-  color: #4f8ce6;
+  color: #1eff44;
   right: -1px;
   bottom: -4px;
 }

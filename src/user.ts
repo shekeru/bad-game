@@ -1,4 +1,4 @@
-import {html, elem} from './globals'
+import {html, elem, Print} from './globals'
 import {Equip, Stat, Stats, StatDict} from './items/Combat'
 import {Inventory} from './items/Inventory'
 import {Player, GroundMats} from './world'
@@ -51,6 +51,11 @@ function StatsWindow(){
   }
 }
 // Inventory Manager (Skills)
+let IX_1 = 0, IY_1 = 0
+function MouseUp(ev) {
+  document.onmouseup = null
+  document.onmousemove = null
+}
 function InvWindow(){
   let list = CreateArticle
     ("Inventory", "ul", "inv")
@@ -62,7 +67,28 @@ function InvWindow(){
       div.style.backgroundImage =
         `url('/item/${Inventory[I].Item.Src}')`
       div.innerHTML = `<div>${Inventory[I].Amnt}</div>`
+      div.oncontextmenu = (ev) => {
+        Print("Right click Item")
       }
+      div.onmousedown = (ev) => {
+        IX_1 = ev.clientX
+        IY_1 = ev.clientY
+        console.log(IX_1, IY_1)
+        document.onmouseup = MouseUp
+        document.onmousemove = (ev) => {
+            ev.preventDefault();
+            let X0 = IX_1 - ev.clientX
+            let Y0 = IY_1 - ev.clientY
+            IX_1 = ev.clientX
+            IY_1 = ev.clientY
+            console.log(X0, Y0)
+            div.style.top = (Number(div.style.top
+              .slice(0, -2)) - Y0) + "px"
+            div.style.left = (Number(div.style.left
+              .slice(0, -2)) - X0) + "px"
+        }
+      }
+    }
   }
 }
 // Materials
