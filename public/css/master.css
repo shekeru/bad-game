@@ -33,6 +33,7 @@ main {
 }
 
 #dialog {
+  border-radius: 4pt;
   padding: 8pt 8pt 8pt 16pt;
   width: fit-content;
   background: white;

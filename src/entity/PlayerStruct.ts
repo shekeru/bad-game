@@ -1,7 +1,7 @@
 import {C_Entity} from '../items/Combat'
-import * as Data from '../defs/store'
-import * as Gear from '../items/Gear'
-import {Stat} from '../items/Gear'
+import * as Item from '../items/Item'
+import {Stat} from '../items/Item'
+import * as Data from '../globals'
 import {Print} from '../globals'
 import * as Map from '../world'
 
@@ -22,11 +22,11 @@ export class PlayerStruct extends C_Entity {
     this.SetStats({
       [Stat.VIT]: 2
     })
-    this.AddGear(Gear.BastardSword)
-    this.AddGear(Gear.LeatherGloves)
-    this.AddGear(Gear.LeatherChest)
-    this.AddGear(Gear.LeatherLegs)
-    this.AddGear(Gear.LeatherBoots)
+    this.AddGear(Item.BronzeSword)
+    // this.AddGear(Item.LeatherGloves)
+    // this.AddGear(Item.LeatherChest)
+    // this.AddGear(Item.LeatherLegs)
+    // this.AddGear(Item.LeatherBoots)
   }
   MoveSafely(a: number, b: number){
     let Pos = `${this.X +a},${this.Y +b}`

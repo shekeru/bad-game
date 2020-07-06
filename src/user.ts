@@ -56,10 +56,13 @@ function InvWindow(){
     ("Inventory", "ul", "inv")
   list.class = "inventory-table"
   for(let I = 0; I < 28; I++) {
-    let li = elem('li', list); let div = elem('div', li)
-    if(Inventory[I])
+    let li = elem('li', list)
+    let div = elem('div', li)
+    if(Inventory[I]) {
       div.style.backgroundImage =
         `url('/item/${Inventory[I].Item.Src}')`
+      div.innerHTML = `<div>${Inventory[I].Amnt}</div>`
+      }
   }
 }
 // Materials

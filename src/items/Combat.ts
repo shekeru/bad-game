@@ -1,18 +1,20 @@
 import {Print} from '../globals'
 import {ImgRefs} from '../world'
-import {Nothing, Equip, Stat} from '../items/Gear'
-export * from '../items/Gear'
+import {Nothing, Equip, Stat} from '../items/Item'
+export * from '../items/Item'
 // Types
 export type Stats = {
   [k: number]: number
 }
-export type Equipment = {
+export type Item = {
   Name: string,
-  Slot: Equip,
-  Stats: Stats
+  Src: string,
+  Slot?: Equip,
+  Stats: Stats,
+  Id: number,
 }
 type Gear = {
-  [idx in Equip]: Equipment
+  [idx in Equip]: Item
 }
 // Classes
 export class C_Base {
@@ -49,7 +51,7 @@ export class C_Entity extends C_Base {
     }; this.RefreshHP()
   }
   // Add Gear Stats
-  AddGear(Item: Equipment) {
+  AddGear(Item: Item) {
     this.Gear[Item.Slot] = Item
     for(let Key in Item.Stats) {
       this.Stats[Key] += Item.Stats[Key]
