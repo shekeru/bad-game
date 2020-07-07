@@ -1,8 +1,8 @@
 import {html, elem, Print, SetValue} from './globals'
-import {Equip, Stat, Stats, StatDict} from './items/Combat'
+import {Equip, Stat, Stats, StatDict, ItemRefs} from './items/Combat'
 import {Inventory} from './items/Inventory'
 import {Player, GroundMats} from './world'
-import { PromptOptions } from './defs/input'
+import { PromptOptions, Dialog } from './defs/input'
 // Create Interface
 let Toolbars = {
   "equip": ["icons/Equip.png", GearWindow],
@@ -66,8 +66,14 @@ function InvWindow(){
    list.class = "inventory-table"
   for(let I = 0; I < 28; I++) {
     let li = elem('li', list)
-    let div = elem('div', li)
     li.onclick = (ev) => {
+      if(Dialog) return;
+      if(useItem) {
+        let I1 = Number(useItem.value)
+        useItem = useItem.removeAttribute('id')
+        Print("Use:", I1, "on", I);
+        return
+      }
       if(moveItem) {
         moveItem.removeAttribute('id')
         let A = Number(moveItem.value)
@@ -75,9 +81,10 @@ function InvWindow(){
         Inventory[A] = Inventory[I]
         Inventory[I] = Ao
         moveItem = null
+        SetValue('inv', Inventory)
         return InvWindow()
-      }; moveItem = li;
-      li.setAttribute('id', 'item-sel');
+      }; (moveItem = li).setAttribute
+        ('id', 'item-sel')
     }, li.value = I
     li.oncontextmenu = (ev) => {
       if(moveItem) {
@@ -88,20 +95,21 @@ function InvWindow(){
       }
       // Dialog Box
       PromptOptions({
-        [`Discard ${Inventory[I].Item.Name}`]: () => {
+        "Use Item": () => {
+          (useItem = li).setAttribute
+            ('id', 'item-use')
+        },
+        "Discard Item": () => {
           delete Inventory[I].Item
           SetValue('inv', {[I]: {}})
-          InvWindow() 
+          InvWindow()
         }
       }, ev)
-      useItem = li;
-      li.setAttribute('id', 'item-use');
     }
-    if(Inventory[I] && Inventory[I].Item) {
-      div.style.backgroundImage =
-        `url('/item/${Inventory[I].Item.Src}')`
+    let ItemS = Inventory[I] ? (Inventory[I].Item || {Id: 0}) : {Id: 0}
+    let div = ItemRefs[ItemS.Id].cloneNode(); li.appendChild(div)
+    if(Inventory[I] && Inventory[I].Item)
       div.innerHTML = `<div>${Inventory[I].Amnt}</div>`
-    }
   }
 }
 // Materials

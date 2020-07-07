@@ -21,7 +21,7 @@ export function AddItem(Item, Amnt) {
   } // New Slots
   for(let I = 0; I < 28; I++) {
     let Slot = Inventory[I]
-    if(Slot == undefined) {
+    if(!Slot || !Slot.Item) {
       Inventory[I] = {
         Item: Item,
         Amnt: Amnt

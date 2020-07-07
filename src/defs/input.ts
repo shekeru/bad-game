@@ -9,9 +9,9 @@ export var Keys = {},
 // Fixate Camera
 export function UpdateCamera() {
     OFFSET_Y = Player.Y * SIZE
-      - Math.round(Y_MAX / 2);
+    - 50 * Math.floor(Y_MAX / 100);
     OFFSET_X = Player.X * SIZE
-      - Math.round(X_MAX / 2);
+    - 50 * Math.floor(X_MAX / 100);
 };
 // AdvanceTick
 var Tick = 1, tTimeLast = 0;
@@ -34,7 +34,7 @@ function Dispatch(){
     Player.MoveSafely(1, 0)
 }
 // Check Action
-let Dialog = undefined
+export let Dialog = undefined
 let P_Dialog = document
   .getElementById('dialog')
 // Insertion of Options
@@ -46,7 +46,7 @@ export function PromptOptions(options, click?) {
   Dialog.removeAttribute('hidden');
   if(click) {
     LastTop = click.clientY + "px"
-    LastLeft = click.clientX + "px"
+    LastLeft = Math.min(X_MAX - 150, click.clientX) + "px"
   } let Last = Dialog.children[0]
   Dialog.style.marginTop = LastTop
   Dialog.style.marginLeft = LastLeft

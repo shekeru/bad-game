@@ -1,5 +1,6 @@
 import {Item} from './Combat'
 import {Stat} from './Stats'
+import { elem } from '../globals';
 export * from './Stats'
 // Enums
 export enum Equip {
@@ -38,6 +39,15 @@ export const LeatherChest:Item = {
     [Stat.DEF]: 3
   }
 }; Items[3] = LeatherChest
+
+export var ItemRefs = {}
+for(let Id in Items) {
+  var div = elem('div');
+  div.style.backgroundImage =
+    `url('/item/${Items[Id].Src}')`
+  ItemRefs[Id] = div
+}
+
 //
 // export const LeatherLegs:Equipment = {
 //   Name: "Leather Legs",
