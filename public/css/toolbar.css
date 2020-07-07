@@ -34,6 +34,7 @@
   max-width: 140px;
   float: right;
 }
+
 #a_inv > ul
 {
   margin: auto;
@@ -49,7 +50,6 @@
     padding: 2px;
     border: 2px inset white;
     border-radius: 2px;
-
     display: inline-grid;
     background: wheat;
 
@@ -67,4 +67,12 @@
   color: #1eff44;
   right: -1px;
   bottom: -4px;
+}
+
+#item-sel {
+  border: 2px inset lightgreen !important;
+}
+
+#item-use {
+  border: 2px inset coral !important;
 }

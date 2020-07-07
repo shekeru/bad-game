@@ -5,7 +5,8 @@ export let Inventory = GetValue('inv', [])
 // Update Objects
 for(let I in Inventory) {
   let x = Inventory[I]
-  x.Item = Items[x.Item.Id]
+  if(x.Item)
+    x.Item = Items[x.Item.Id]
 }
 
 export function AddItem(Item, Amnt) {
@@ -13,9 +14,8 @@ export function AddItem(Item, Amnt) {
   // Add to Item
   for(let I in Inventory) {
     let Slot = Inventory[I]
-    if(Slot.Item.Id == Item.Id) {
-      Slot.Amnt += Amnt
-      Slot.Item = Item
+    if(Slot.Item && !Slot.Item.Slot && Slot.Item.Id == Item.Id) {
+      Slot.Amnt += Amnt; Slot.Item = Item
       return SetValue('inv', Inventory)
     }
   } // New Slots

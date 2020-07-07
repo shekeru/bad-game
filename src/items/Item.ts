@@ -11,8 +11,7 @@ export const Items = []
 // Gear List
 export const Nothing:Item = {
   Id: 0, Name: "  ...  ",
-  Src: "", Slot: 0,
-  Stats: {}
+  Src: "", Stats: {},
 }; Items[0] = Nothing
 
 export const Feather:Item = {

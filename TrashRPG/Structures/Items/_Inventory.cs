@@ -30,7 +30,7 @@ namespace Structures.Items
         public Item Item;
         public int Amount;
     }
-    public class Item
+    public abstract class Item
     {
         static readonly Item Self;
         readonly bool Stacks = true;

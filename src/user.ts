@@ -1,7 +1,8 @@
-import {html, elem, Print} from './globals'
+import {html, elem, Print, SetValue} from './globals'
 import {Equip, Stat, Stats, StatDict} from './items/Combat'
 import {Inventory} from './items/Inventory'
 import {Player, GroundMats} from './world'
+import { PromptOptions } from './defs/input'
 // Create Interface
 let Toolbars = {
   "equip": ["icons/Equip.png", GearWindow],
@@ -30,11 +31,18 @@ function CreateArticle(TitleName, Bottom, Type) :HTMLElement {
   ActiveMat = null
   return list
 }
+// Re Render
+function ReRender() {
+  for(let Key in Toolbars) {
+    if(lastWindow && lastWindow.id == `a_${Key}`) {
+      return Toolbars[Key][1]();
+    }
+  }
+}; //setInterval(ReRender, 150);
 // Window Manager (Equipment)
 function GearWindow(){
   let list = CreateArticle
     ("Equipment", "ul", "equip")
-  console.log(Player.Gear, Player.Stats)
   for(let Key in Player.Gear) {
     let li = elem('li', list)
     li.innerHTML = Player.Gear[Key].Name
@@ -51,43 +59,48 @@ function StatsWindow(){
   }
 }
 // Inventory Manager (Skills)
-let IX_1 = 0, IY_1 = 0
-function MouseUp(ev) {
-  document.onmouseup = null
-  document.onmousemove = null
-}
+let moveItem = null, useItem = null
 function InvWindow(){
   let list = CreateArticle
     ("Inventory", "ul", "inv")
-  list.class = "inventory-table"
+   list.class = "inventory-table"
   for(let I = 0; I < 28; I++) {
     let li = elem('li', list)
     let div = elem('div', li)
-    if(Inventory[I]) {
+    li.onclick = (ev) => {
+      if(moveItem) {
+        moveItem.removeAttribute('id')
+        let A = Number(moveItem.value)
+        let Ao = Inventory[A]
+        Inventory[A] = Inventory[I]
+        Inventory[I] = Ao
+        moveItem = null
+        return InvWindow()
+      }; moveItem = li;
+      li.setAttribute('id', 'item-sel');
+    }, li.value = I
+    li.oncontextmenu = (ev) => {
+      if(moveItem) {
+        moveItem = moveItem.removeAttribute('id')
+      }
+      if(useItem) {
+        useItem.removeAttribute('id')
+      }
+      // Dialog Box
+      PromptOptions({
+        [`Discard ${Inventory[I].Item.Name}`]: () => {
+          delete Inventory[I].Item
+          SetValue('inv', {[I]: {}})
+          InvWindow() 
+        }
+      }, ev)
+      useItem = li;
+      li.setAttribute('id', 'item-use');
+    }
+    if(Inventory[I] && Inventory[I].Item) {
       div.style.backgroundImage =
         `url('/item/${Inventory[I].Item.Src}')`
       div.innerHTML = `<div>${Inventory[I].Amnt}</div>`
-      div.oncontextmenu = (ev) => {
-        Print("Right click Item")
-      }
-      div.onmousedown = (ev) => {
-        IX_1 = ev.clientX
-        IY_1 = ev.clientY
-        console.log(IX_1, IY_1)
-        document.onmouseup = MouseUp
-        document.onmousemove = (ev) => {
-            ev.preventDefault();
-            let X0 = IX_1 - ev.clientX
-            let Y0 = IY_1 - ev.clientY
-            IX_1 = ev.clientX
-            IY_1 = ev.clientY
-            console.log(X0, Y0)
-            div.style.top = (Number(div.style.top
-              .slice(0, -2)) - Y0) + "px"
-            div.style.left = (Number(div.style.left
-              .slice(0, -2)) - X0) + "px"
-        }
-      }
     }
   }
 }
@@ -118,7 +131,7 @@ function GroundWindow() {
     }
 }
 // Respawning
-let Respawn = html("respawn")
+export let Respawn = html("respawn")
 Respawn.onclick = () => {
   Respawn.setAttribute("hidden", "")
   Player.alpha = 1;

@@ -51,7 +51,7 @@ export class PlayerStruct extends C_Entity {
         this.SeqCombat(Other);
       else {
         //Respawn.removeAttribute('hidden');
-        this.alpha = 0.4
+        this.EntityDeath();
         Print(Other.name, "wins with", Other.HP, 'hitpoints');
         break;
       } if(Other.HP > 0)
