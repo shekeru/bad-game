@@ -1,6 +1,6 @@
 import {html, elem, Print, SetValue} from './globals'
-import {Equip, Stat, Stats, StatDict, ItemRefs} from './items/Combat'
-import {Inventory} from './items/Inventory'
+import {Equip, Stat, Stats, StatDict, ItemRefs, Items} from './items/Combat'
+import {Inventory, RmItem} from './items/Inventory'
 import {Player, GroundMats} from './world'
 import { PromptOptions, Dialog } from './defs/input'
 // Create Interface
@@ -71,28 +71,26 @@ function InvWindow(){
       if(useItem) {
         let I1 = Number(useItem.value)
         useItem = useItem.removeAttribute('id')
-        Print("Use:", I1, "on", I);
+        Print("Use:", Items[Inventory[I1].Item].Name,
+          "on", Items[Inventory[I].Item].Name);
         return
       }
       if(moveItem) {
-        moveItem.removeAttribute('id')
         let A = Number(moveItem.value)
         let Ao = Inventory[A]
         Inventory[A] = Inventory[I]
         Inventory[I] = Ao
-        moveItem = null
+        moveItem = moveItem
+          .removeAttribute('id')
         SetValue('inv', Inventory)
         return InvWindow()
-      }; (moveItem = li).setAttribute
-        ('id', 'item-sel')
+      }; (moveItem = li).setAttribute('id', 'item-sel')
     }, li.value = I
     li.oncontextmenu = (ev) => {
-      if(moveItem) {
+      if(moveItem)
         moveItem = moveItem.removeAttribute('id')
-      }
-      if(useItem) {
-        useItem.removeAttribute('id')
-      }
+      if(useItem)
+        useItem = useItem.removeAttribute('id')
       // Dialog Box
       PromptOptions({
         "Use Item": () => {
@@ -100,15 +98,13 @@ function InvWindow(){
             ('id', 'item-use')
         },
         "Discard Item": () => {
-          delete Inventory[I].Item
-          SetValue('inv', {[I]: {}})
-          InvWindow()
+          RmItem(I); InvWindow()
         }
       }, ev)
     }
-    let ItemS = Inventory[I] ? (Inventory[I].Item || {Id: 0}) : {Id: 0}
-    let div = ItemRefs[ItemS.Id].cloneNode(); li.appendChild(div)
-    if(Inventory[I] && Inventory[I].Item)
+    let div = ItemRefs[Inventory[I].Item].cloneNode()
+    li.appendChild(div)
+    if(Inventory[I].Amnt > 1)
       div.innerHTML = `<div>${Inventory[I].Amnt}</div>`
   }
 }
@@ -134,8 +130,7 @@ function GroundWindow() {
         li.setAttribute('id', 'mat-sel');
         ActiveMat.removeAttribute('id');
         ActiveMat = li;
-      };
-
+      }
     }
 }
 // Respawning
