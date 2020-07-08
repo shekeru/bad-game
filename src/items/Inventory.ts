@@ -1,7 +1,9 @@
 import {GetValue, SetValue} from '../globals'
 import {Equip, Stat, Items} from './Item'
 import { Item } from './Combat'
-export let Inventory = GetValue('inv', [])
+
+export let Inventory = GetValue('inv', []) as
+  Array<{Item: number, Amnt: number}>
 // Update Objects
 for(let I = 0; I < 28; I++) {
   if(!Inventory[I])
@@ -31,7 +33,7 @@ export function AddItem(Item, Amnt) {
   }
 }
 // Discard Item
-export function RmItem(I) {
+export function DelItem(I) {
     Inventory[I].Item = 0
     Inventory[I].Amnt = 0
     SetValue('inv',

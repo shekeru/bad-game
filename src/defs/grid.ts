@@ -1,7 +1,8 @@
+import {OFFSET_X, OFFSET_Y, SIZE} from './input'
+import { UpdateColor } from '../ui/Ground'
+import {UpdateObject} from './tools'
 import { Ctx } from '../globals'
 import * as Map from '../world'
-import {UpdateObject, UpdateColor} from './tools'
-import {OFFSET_X, OFFSET_Y, SIZE} from './input'
 import * as Input from './input'
 let LastPos = {}
 // Continue

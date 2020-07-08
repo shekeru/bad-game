@@ -20,6 +20,8 @@
 }
 
 #toolbar > article {
+  margin-right: 6px;
+  margin-left: 6px;
 }
 
 #a_world > ul > li {

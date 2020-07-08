@@ -1,6 +1,7 @@
-import {Print} from '../globals'
-import {ImgRefs} from '../world'
+import { RenderInv } from '../ui/Inventory'
 import {Nothing, Equip, Stat} from '../items/Item'
+import {Print, html} from '../globals'
+import {ImgRefs} from '../world'
 export * from '../items/Item'
 // Types
 export type Stats = {
@@ -81,6 +82,7 @@ export class C_Entity extends C_Base {
       this.solid = true
       this.alpha = 1
     }, this.respawnTime * 1000)
+    RenderInv(html('bt_inv'))
   }
 }
 // Math Functions

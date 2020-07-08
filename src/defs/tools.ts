@@ -1,14 +1,5 @@
-import { ActiveMat } from '../user';
 import * as Map from '../world'
 // Update Colors
-export function UpdateColor(pos) {
-  if(!ActiveMat) return;
-  let code = ActiveMat.getAttribute('ref');
-  if(code) Map.Ground[pos] = Number(code);
-  else delete Map.Ground[pos];
-  console.log("export let Ground = ",
-    JSON.stringify(Map.Ground));
-}
 // Map Init Ents List
 // let NilEnt = ActiveEnt =
 //   document.getElementById("ent-sel");
@@ -41,3 +32,9 @@ export function UpdateObject(pos) {
   console.log("export let Statics = ", JSON
     .stringify(Map.Statics));
 }
+
+// export let Respawn = html("respawn")
+// Respawn.onclick = () => {
+//   Respawn.setAttribute("hidden", "")
+//   Player.alpha = 1;
+// }
