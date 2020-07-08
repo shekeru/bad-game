@@ -7,7 +7,7 @@ import {html, elem} from '../globals'
 let Toolbars = {
   "equip": ["icons/Equip.png", GearWindow],
   "skill": ["icons/Skills.png", StatsWindow],
-  "inv": ["icons/Inventory.png", InventoryWindow],
+  "inv": ["icons/Inventory.png", () => {InventoryWindow()}], //lolwut
   "ents": ["icons/EntityOpts.png", () => {}],
   "opts": ["icons/Options.png", GroundWindow],
 }, t_icons = html("t_icons")
