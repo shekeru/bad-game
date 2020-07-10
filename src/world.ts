@@ -35,8 +35,8 @@ export let StaticMats = {
     src: "chicken.png"
   },
   4: {
-    name: "Door Closed",
-    src: "door_closed.png"
+    name: "Cow",
+    src: "cow.png"
   },
   5: {
     name: "Fence Horiz",
@@ -61,6 +61,14 @@ export let StaticMats = {
   10: {
     name: "Fence RightTop",
     src: "fence_rt.png"
+  },
+  11: {
+    name: "Door Closed",
+    src: "door_closed.png"
+  },
+  12: {
+    name: "Door Open",
+    src: "door_open.png"
   }
 }
 // Loading Images For Statics

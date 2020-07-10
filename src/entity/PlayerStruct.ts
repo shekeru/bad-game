@@ -1,3 +1,4 @@
+import { GearWindow } from '../ui/Equipment'
 import { AddItem } from '../items/Inventory'
 import {C_Entity, Item} from '../items/Combat'
 import * as Gear from '../items/Item'
@@ -80,7 +81,7 @@ export class PlayerStruct extends C_Entity {
     this.Gear[Slot] = Gear.Nothing
     for(let Key in Item.Stats)
       this.Stats[Key] -= Item.Stats[Key]
-    AddItem(Item, 1)
+    AddItem(Item, 1), GearWindow()
     Data.SetValue('gear', {
       [Slot]: 0
     })

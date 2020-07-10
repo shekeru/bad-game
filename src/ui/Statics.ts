@@ -14,7 +14,7 @@ export function UpdateObject(pos) {
 // Window
 export function StaticsWindow() {
     let list = CreateArticle
-      ("Ground Features", "ul", "world")
+      ("Static Features", "ul", "world")
     let NilEnt = elem('li', list)
     NilEnt.innerHTML = "Empty Space"
     NilEnt.setAttribute('id', 'mat-sel');
