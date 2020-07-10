@@ -20,3 +20,6 @@ Canvas.addEventListener("contextmenu",
     Input.Clicks.push(ev);
     return false;
 })
+Canvas.addEventListener("mousemove", (ev) => {
+  console.log(ev)
+})

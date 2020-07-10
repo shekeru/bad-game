@@ -38,6 +38,7 @@ export function InventoryWindow() {
         useItem = useItem.removeAttribute('id')
       // Dialog Box
       let Item = Items[Inventory[I].Item]
+      li.title = Item.Name
       let OptionsBase = {
         "Use Item": () => {
           (useItem = li).setAttribute

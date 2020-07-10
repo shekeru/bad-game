@@ -44,6 +44,7 @@ export class C_Entity extends C_Base {
       if (isNaN(Number(Key)))
         this.Stats[Stat[Key]] = 1
     this.RefreshHP()
+    console.log(this.Gear)
   }
   // Add Entity Stats
   SetStats(NewStats: Stats) {

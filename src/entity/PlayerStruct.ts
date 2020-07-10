@@ -23,14 +23,10 @@ export class PlayerStruct extends C_Entity {
     this.SetStats({
       [Stat.VIT]: 2
     })
+    // Init Gear
     let Saved = Data.GetValue('gear', {})
-    for(let S in Saved)
+    for(let S in Saved) if(Saved[S])
       this.AddGear(Gear.Items[Saved[S]])
-    //this.AddGear(Gear.BronzeSword)
-    // this.AddGear(Item.LeatherGloves)
-    // this.AddGear(Item.LeatherChest)
-    // this.AddGear(Item.LeatherLegs)
-    // this.AddGear(Item.LeatherBoots)
   }
   MoveSafely(a: number, b: number){
     let Pos = `${this.X +a},${this.Y +b}`

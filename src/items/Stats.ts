@@ -1,6 +1,6 @@
 export enum Stat {
   VIT = 1,
-  STR, DEX,
+  DEX, STR,
   DEF, AGI
 }
 export let StatDict = {

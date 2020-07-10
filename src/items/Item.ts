@@ -41,6 +41,16 @@ export const LeatherChest:Item = {
   }
 }; Items[3] = LeatherChest
 
+export const LeatherLegs:Item = {
+  Id:4, Name: "Leather Legs",
+  Src: "LeatherLegs.png",
+  Slot: Equip.Legs,
+  Stats: {
+    [Stat.DEF]: 2,
+    [Stat.AGI]: 1
+  }
+}; Items[4] = LeatherLegs
+
 export var ItemRefs = {}
 for(let Id in Items) {
   var div = elem('div');
@@ -49,15 +59,6 @@ for(let Id in Items) {
   ItemRefs[Id] = div
 }
 
-//
-// export const LeatherLegs:Equipment = {
-//   Name: "Leather Legs",
-//   Slot: Equip.Legs,
-//   Stats: {
-//     [Stat.DEF]: 2,
-//     [Stat.AGI]: 1
-//   }
-// }
 //
 // export const LeatherGloves:Equipment = {
 //   Name: "Leather Gloves",
