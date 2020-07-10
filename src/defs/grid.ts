@@ -1,6 +1,6 @@
 import {OFFSET_X, OFFSET_Y, SIZE} from './input'
+import { UpdateObject } from '../ui/Statics'
 import { UpdateColor } from '../ui/Ground'
-import {UpdateObject} from './tools'
 import { Ctx } from '../globals'
 import * as Map from '../world'
 import * as Input from './input'
@@ -43,9 +43,8 @@ export function DrawWorld(Click) {
       if(ClickY && ClickX) {
         LastPos = [Click.button, xL, yL];
         // Update in Tools
-        LastPos[0] ?
-          UpdateObject(position)
-          :UpdateColor(position)
+        UpdateObject(position)
+        UpdateColor(position)
         // Input Testing
         let Dyn = Map.Dynamics[position]
         if(LastPos[0] && Dyn && Dyn.alpha == 1

@@ -21,5 +21,6 @@ Canvas.addEventListener("contextmenu",
     return false;
 })
 Canvas.addEventListener("mousemove", (ev) => {
-  console.log(ev)
+  Input.Cursor.Y = ev.clientY
+  Input.Cursor.X = ev.clientX
 })

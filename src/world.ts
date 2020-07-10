@@ -12,7 +12,7 @@ export let GroundMats = {
     solid: true
   },
   3: {
-    name: "Wooden Floor",
+    name: "Dirt Floor",
     hex: "#855E42"
   },
   4: {

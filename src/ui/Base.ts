@@ -1,3 +1,4 @@
+import { StaticsWindow, ClearActiveEnt } from './Statics'
 import { GroundWindow, ClearActiveMat } from './Ground'
 import { InventoryWindow } from './Inventory'
 import { GearWindow } from './Equipment'
@@ -8,7 +9,7 @@ let Toolbars = {
   "equip": ["icons/Equip.png", GearWindow],
   "skill": ["icons/Skills.png", StatsWindow],
   "inv": ["icons/Inventory.png", () => {InventoryWindow()}], //lolwut
-  "ents": ["icons/EntityOpts.png", () => {}],
+  "ents": ["icons/EntityOpts.png", StaticsWindow],
   "opts": ["icons/Options.png", GroundWindow],
 }, t_icons = html("t_icons")
 // Create Interface
@@ -32,5 +33,6 @@ export function CreateArticle(TitleName: string,
   article.id = `a_${Type}`
   list.id = `bt_${Type}`
   ClearActiveMat()
+  ClearActiveEnt()
   return list
 }

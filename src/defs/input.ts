@@ -5,7 +5,8 @@ export let SIZE = 50,
   OFFSET_X = 0 * SIZE,
   OFFSET_Y = 0 * SIZE;
 export var Keys = {},
-  Clicks = []
+  Clicks = [],
+Cursor = {X: 0, Y: 0}
 // Fixate Camera
 export function UpdateCamera() {
     OFFSET_Y = Player.Y * SIZE
