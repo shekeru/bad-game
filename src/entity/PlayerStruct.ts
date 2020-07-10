@@ -1,6 +1,7 @@
-import {C_Entity} from '../items/Combat'
-import * as Item from '../items/Item'
-import {Stat} from '../items/Item'
+import { AddItem } from '../items/Inventory'
+import {C_Entity, Item} from '../items/Combat'
+import * as Gear from '../items/Item'
+import {Stat, Equip} from '../items/Item'
 import * as Data from '../globals'
 import {Print} from '../globals'
 import * as Map from '../world'
@@ -22,9 +23,12 @@ export class PlayerStruct extends C_Entity {
     this.SetStats({
       [Stat.VIT]: 2
     })
-    this.AddGear(Item.BronzeSword)
+    let Saved = Data.GetValue('gear', {})
+    for(let S in Saved)
+      this.AddGear(Gear.Items[Saved[S]])
+    //this.AddGear(Gear.BronzeSword)
     // this.AddGear(Item.LeatherGloves)
-    this.AddGear(Item.LeatherChest)
+    // this.AddGear(Item.LeatherChest)
     // this.AddGear(Item.LeatherLegs)
     // this.AddGear(Item.LeatherBoots)
   }
@@ -62,5 +66,27 @@ export class PlayerStruct extends C_Entity {
         break;
       }
     }
+  }
+  // Player Gear
+  AddGear(Item: Item) {
+    let Prev = this.Gear[Item.Slot]
+    if(Prev != Gear.Nothing)
+      this.DelGear(Prev.Slot)
+    this.Gear[Item.Slot] = Item
+    for(let Key in Item.Stats)
+      this.Stats[Key] += Item.Stats[Key]
+    Data.SetValue('gear', {
+      [Item.Slot]: Item.Id
+    })
+  }
+  DelGear(Slot: Equip) {
+    let Item = this.Gear[Slot]
+    this.Gear[Slot] = Gear.Nothing
+    for(let Key in Item.Stats)
+      this.Stats[Key] -= Item.Stats[Key]
+    AddItem(Item, 1)
+    Data.SetValue('gear', {
+      [Slot]: 0
+    })
   }
 }

@@ -8,7 +8,8 @@ export enum Equip {
   Gloves, Chest,
   Legs, Boots
 }
-export const Items = []
+export const Items =
+  [] as Array<Item>
 // Gear List
 export const Nothing:Item = {
   Id: 0, Name: "  ...  ",

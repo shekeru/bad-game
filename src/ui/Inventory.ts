@@ -3,10 +3,10 @@ import { PromptOptions, Dialog } from '../defs/input'
 import {Inventory, DelItem} from '../items/Inventory'
 import {ItemRefs, Items} from '../items/Combat'
 import {CreateArticle} from './Base'
+import { Player } from '../world'
 // Inventory Manager (Skills)
 let moveItem = null, useItem = null
 export function InventoryWindow() {
-  console.log("fuck, fuck")
   let list = <any> CreateArticle("Inventory", "ul", "inv")
   list.class = "inventory-table"
   for(let I = 0; I < 28; I++) {
@@ -37,16 +37,23 @@ export function InventoryWindow() {
       if(useItem)
         useItem = useItem.removeAttribute('id')
       // Dialog Box
-      PromptOptions({
+      let Item = Items[Inventory[I].Item]
+      let OptionsBase = {
         "Use Item": () => {
           (useItem = li).setAttribute
             ('id', 'item-use')
-        },
-        "Discard Item": () => {
+        }
+      }
+      if(Item.Slot)
+        OptionsBase["Equip Gear"] = () => {
           DelItem(I)
+          Player.AddGear(Item)
           RenderInv(list)
         }
-      }, ev)
+      OptionsBase["Discard Item"] = () => {
+          DelItem(I)
+          RenderInv(list)
+      }; PromptOptions(OptionsBase, ev)
     }
   }; RenderInv(list)
 }

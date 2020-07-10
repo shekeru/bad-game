@@ -51,13 +51,6 @@ export class C_Entity extends C_Base {
         this.Stats[Key] = NewStats[Key]
     }; this.RefreshHP()
   }
-  // Add Gear Stats
-  AddGear(Item: Item) {
-    this.Gear[Item.Slot] = Item
-    for(let Key in Item.Stats) {
-      this.Stats[Key] += Item.Stats[Key]
-    }
-  }
   // Sequence Combat
   SeqCombat(Other: C_Entity) {
     let dmg = Math.round(100 * this.Stats[Stat.STR]
