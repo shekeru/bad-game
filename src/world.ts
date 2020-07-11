@@ -24,6 +24,7 @@ export let GroundMats = {
 import { OakTree } from './entity/OakTree'
 import {TalkingBarrel} from './entity/TalkingBarrel';
 import {Chicken} from './entity/Chicken';
+import {Cow} from './entity/Cow';
 // Layer1 Refs
 export let StaticMats = {
   1: {
@@ -43,6 +44,7 @@ export let StaticMats = {
   4: {
     name: "Cow",
     src: "cow.png"
+    Object: Cow,
   },
   5: {
     name: "Fence Horiz",

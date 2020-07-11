@@ -12,15 +12,11 @@ export class Chicken extends C_Entity {
       ["Attack " + this.name]:
         () => Player.StartCombat(this),
       ["Examine " + this.name]:
-        this.Examine
+        () => Print("A cute looking hen")
     }
-  }
-  Examine(){
-    Print("A cute looking hen");
   }
   EntityDeath(){
     Inv.AddItem(Item.Feather, 5)
-    Inv.AddItem(Item.LeatherLegs, 1)
     super.EntityDeath()
   }
 }

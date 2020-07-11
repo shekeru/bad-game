@@ -62,7 +62,7 @@ export class C_Entity extends C_Base {
   }
   // Sequence Combat
   SeqCombat(Other: C_Entity) {
-    let dmg = Math.round(100 * this.Stats[Stat.STR]
+    let dmg = Math.round(75 * this.Stats[Stat.STR]
       * AccuracyCoeff(this.Stats[Stat.DEX]))
     dmg *= 1 - Math.random() / 100
       * this.Stats[Stat.DEF]
@@ -93,5 +93,5 @@ function AccuracyCoeff(dex) {
   return Math.pow(Math.E, -Math.pow
       (Rand - 2, 2) / 2)
     / Math.sqrt(2*Math.PI)
-    * (2 +dex/ 20);
+    * (2 +dex/ 25);
 }
