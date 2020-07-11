@@ -7,7 +7,6 @@ import * as Input from './input'
 let LastPos = {}
 // Continue
 export function DrawWorld(Click) {
-  Input.UpdateCamera();
   // Mouse Clicks & Grid
   for (let y = NormOffset(OFFSET_Y); y <= Input.Y_MAX; y += SIZE) {
     let ClickY = Click && y <= Click.y && Click.y < y + SIZE;
@@ -41,13 +40,15 @@ export function DrawWorld(Click) {
       let ClickX = x <= Click.x && Click.x < x + SIZE;
       // Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
-        LastPos = [Click.button, xL, yL];
         // Update in Tools
-        UpdateObject(position)
-        UpdateColor(position)
+        if(Click.type == "mouseup") {
+          UpdateObject(position)
+          UpdateColor(position)
+        }
         // Input Testing
         let Dyn = Map.Dynamics[position]
-        if(LastPos[0] && Dyn && Dyn.solid
+        if(Click.type == "mouseup" &&
+          Click.button && Dyn && Dyn.solid
           && Math.abs(Map.Player.X - xL) <= 1
           && Math.abs(Map.Player.Y - yL) <= 1)
           Input.PromptOptions(Dyn.Context(), Click)

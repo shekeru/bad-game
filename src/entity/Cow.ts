@@ -31,6 +31,7 @@ export class Cow extends C_Entity {
   }
   EntityDeath(){
     Inv.AddItem(Item.CowLeather, 1)
+    this.respawnTime = 180
     super.EntityDeath()
   }
 }

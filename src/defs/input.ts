@@ -17,7 +17,7 @@ export function UpdateCamera() {
 // AdvanceTick
 var Tick = 1, tTimeLast = 0;
 export function AdvanceTick(current) {
-  if(current > 125 + tTimeLast) {
+  if(current > 115 + tTimeLast) {
     tTimeLast = current; Tick++;
     Dispatch(); return true;
   };
@@ -33,6 +33,7 @@ function Dispatch(){
     Player.MoveSafely(0, 1)
   if(Keys["KeyD"])
     Player.MoveSafely(1, 0)
+  UpdateCamera()
 }
 // Check Action
 export let Dialog = undefined

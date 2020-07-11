@@ -11,6 +11,7 @@ export class OakTree extends C_Base {
         () => {
           Print("You chop down the oak tree.")
           Inv.AddItem(Item.OakLogs, 1)
+          this.respawnTime = 60 * 5
           this.SimpleDeath()
         },
       "Examine Tree":

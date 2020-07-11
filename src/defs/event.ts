@@ -1,14 +1,13 @@
 import { Ctx, LogQueue } from '../globals';
 import {DrawWorld} from './grid'
 import * as Input from './input'
-var FPS = 10, lastMs = 0, frameQty = 0;
+var FPS = 15, lastMs = 0, frameQty = 0;
 // Event Loop
 export function EventLoop(current: number) {
-  requestAnimationFrame(EventLoop);
+  Input.AdvanceTick(current)
   Ctx.font = "10pt monospace"
   // Continue
-  if(!Input.AdvanceTick(current))
-    return; Ctx.beginPath();
+  Ctx.beginPath();
   // Begin Drawing
   DrawWorld(Input.Clicks.shift() || {});
   // Updated FPS
@@ -16,7 +15,7 @@ export function EventLoop(current: number) {
     FPS = Math.round(0.75 * FPS + frameQty * 0.25);
     lastMs = current; frameQty = 0;
   }; frameQty++;
-  //Ctx.strokeText(`FPS: ${FPS}`, 5, 15);
+  Ctx.strokeText(`FPS: ${FPS}`, 5, Input.Y_MAX - 5);
   RenderCon(); Ctx.stroke();
 }
 

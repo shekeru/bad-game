@@ -3,7 +3,7 @@ import {EventLoop} from './defs/event'
 import * as Input from './defs/input'
 // Main Functions
 function MainOnLoad() {
-  requestAnimationFrame(EventLoop)
+  setInterval(() => requestAnimationFrame(EventLoop), 65)
   Input.ResetSize();
 }; window.onload = MainOnLoad
 // Keyboards
@@ -12,8 +12,10 @@ window.addEventListener("keydown", (ev) =>
 window.addEventListener("keyup", (ev) =>
   {Input.Keys[ev.code] = false})
 // Mouse Cavnas
-Canvas.addEventListener("click", (ev) =>
-  Input.Clicks.push(ev))
+Canvas.addEventListener("mousedown",
+  (ev) => Input.Clicks.push(ev))
+Canvas.addEventListener("mouseup",
+  (ev) => Input.Clicks.push(ev))
 Canvas.addEventListener("contextmenu",
   (ev) => {
     ev.preventDefault();
@@ -23,4 +25,5 @@ Canvas.addEventListener("contextmenu",
 Canvas.addEventListener("mousemove", (ev) => {
   Input.Cursor.Y = ev.clientY
   Input.Cursor.X = ev.clientX
+  Input.Clicks.push(ev)
 })

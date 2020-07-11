@@ -30,9 +30,9 @@ export function GroundWindow() {
       li.innerHTML = GroundMats[Code].name;
       li.style.color = GroundMats[Code].hex;
       li.onclick = function() {
-        li.setAttribute('id', 'mat-sel');
-        ActiveBrush.Elem.removeAttribute('id')
         ActiveBrush.Id = Number(Code)
+        ActiveBrush.Elem.removeAttribute('id')
+        li.setAttribute('id', 'mat-sel');
         ActiveBrush.Elem = li
       }
     }
