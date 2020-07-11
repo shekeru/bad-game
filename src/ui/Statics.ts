@@ -1,14 +1,15 @@
 import {elem} from '../globals'
 import {Statics, StaticMats} from '../world'
 import {CreateArticle, ActiveBrush} from './Base'
+// Printing
+window.Game.Statics = () =>
+  JSON.stringify(Statics);
 // Statics Logic
 export function UpdateObject(pos) {
   if(ActiveBrush.Type != 2) return;
   let code = ActiveBrush.Id;
   if(code) Statics[pos] = Number(code);
   else delete Statics[pos];
-  console.log("export let Statics = ", JSON
-    .stringify(Statics));
 }
 // Window
 export function StaticsWindow() {

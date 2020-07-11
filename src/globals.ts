@@ -1,3 +1,6 @@
+declare global {
+  interface Window { Game: any; }
+}; window.Game = {}
 // Globals
 export const Canvas = <HTMLCanvasElement>
   document.getElementById("canvas")

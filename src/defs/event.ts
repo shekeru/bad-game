@@ -4,10 +4,7 @@ import * as Input from './input'
 var FPS = 15, lastMs = 0, frameQty = 0;
 // Event Loop
 export function EventLoop(current: number) {
-  Input.AdvanceTick(current)
-  Ctx.font = "10pt monospace"
-  // Continue
-  Ctx.beginPath();
+  Input.AdvanceTick(current); Ctx.beginPath()
   // Begin Drawing
   DrawWorld(Input.Clicks.shift() || {});
   // Updated FPS
@@ -16,7 +13,7 @@ export function EventLoop(current: number) {
     lastMs = current; frameQty = 0;
   }; frameQty++;
   Ctx.strokeText(`FPS: ${FPS}`, 5, Input.Y_MAX - 5);
-  RenderCon(); Ctx.stroke();
+    RenderCon(); Ctx.stroke();
 }
 
 function RenderCon() {

@@ -4,7 +4,7 @@ import { UpdateColor } from '../ui/Ground'
 import { Ctx } from '../globals'
 import * as Map from '../world'
 import * as Input from './input'
-let LastPos = {}
+let InClick = false;
 // Continue
 export function DrawWorld(Click) {
   // Mouse Clicks & Grid
@@ -41,7 +41,8 @@ export function DrawWorld(Click) {
       // Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
         // Update in Tools
-        if(Click.type == "mouseup") {
+        if(Click.type == "mousedown") {
+          InClick = true;
           UpdateObject(position)
           UpdateColor(position)
         }

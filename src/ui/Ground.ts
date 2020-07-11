@@ -1,14 +1,15 @@
 import {elem} from '../globals'
 import {Ground, GroundMats} from '../world'
 import {CreateArticle, ActiveBrush} from './Base'
+// Printing
+window.Game.Ground = () =>
+  JSON.stringify(Ground);
 // Materials Logic
 export function UpdateColor(pos) {
   if(ActiveBrush.Type != 1) return;
   let code = ActiveBrush.Id;
   if(code) Ground[pos] = Number(code);
   else delete Ground[pos];
-  console.log("export let Ground = ",
-    JSON.stringify(Ground));
 }
 // Window
 export function GroundWindow() {
