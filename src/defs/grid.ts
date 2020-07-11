@@ -39,7 +39,7 @@ export function DrawWorld(Click) {
       }
       // Check click X
       let ClickX = x <= Click.x && Click.x < x + SIZE;
-      //Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
+      Ctx.strokeText(`${xL}, ${yL}`, x + 3, y+10);
       if(ClickY && ClickX) {
         LastPos = [Click.button, xL, yL];
         // Update in Tools
@@ -47,7 +47,7 @@ export function DrawWorld(Click) {
         UpdateColor(position)
         // Input Testing
         let Dyn = Map.Dynamics[position]
-        if(LastPos[0] && Dyn && Dyn.alpha == 1
+        if(LastPos[0] && Dyn && Dyn.solid
           && Math.abs(Map.Player.X - xL) <= 1
           && Math.abs(Map.Player.Y - yL) <= 1)
           Input.PromptOptions(Dyn.Context(), Click)

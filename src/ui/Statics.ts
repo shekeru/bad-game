@@ -1,11 +1,10 @@
 import {elem} from '../globals'
 import {Statics, StaticMats} from '../world'
-import {CreateArticle} from './Base'
+import {CreateArticle, ActiveBrush} from './Base'
 // Statics Logic
-let ActiveEnt = null
 export function UpdateObject(pos) {
-  if(!ActiveEnt) return;
-  let code = ActiveEnt.getAttribute('ref');
+  if(ActiveBrush.Type != 2) return;
+  let code = ActiveBrush.Id;
   if(code) Statics[pos] = Number(code);
   else delete Statics[pos];
   console.log("export let Statics = ", JSON
@@ -19,22 +18,21 @@ export function StaticsWindow() {
     NilEnt.innerHTML = "Empty Space"
     NilEnt.setAttribute('id', 'mat-sel');
     NilEnt.onclick = () => {
-      ActiveEnt.removeAttribute('id')
+      if(ActiveBrush.Elem)
+        ActiveBrush.Elem.removeAttribute('id')
       NilEnt.setAttribute('id', 'mat-sel')
-      ActiveEnt = NilEnt
-    }; ActiveEnt = NilEnt
+      ActiveBrush.Elem = NilEnt
+      ActiveBrush.Id = 0
+    }; NilEnt.onclick(<any> 0)
+    ActiveBrush.Type = 2
     for(let Code in StaticMats) {
       let li = elem('li', list)
       li.innerHTML = StaticMats[Code].name;
-      li.setAttribute('ref', Code);
       li.onclick = function() {
         li.setAttribute('id', 'mat-sel');
-        ActiveEnt.removeAttribute('id');
-        ActiveEnt = li;
+        ActiveBrush.Elem.removeAttribute('id')
+        ActiveBrush.Id = Number(Code)
+        ActiveBrush.Elem = li
       }
     }
-}
-
-export function ClearActiveEnt() {
-  ActiveEnt = null
 }

@@ -51,6 +51,12 @@ export const LeatherLegs:Item = {
   }
 }; Items[4] = LeatherLegs
 
+export const OakLogs:Item = {
+  Id:5, Name: "Oak Logs",
+  Src: "OakLogs.png",
+  Stats: {}
+}; Items[5] = OakLogs
+
 export var ItemRefs = {}
 for(let Id in Items) {
   var div = elem('div');

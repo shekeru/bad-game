@@ -4,9 +4,8 @@ import {C_Entity, Stat} from '../items/Combat'
 import {Player} from '../world'
 
 export class TalkingBarrel extends C_Entity {
-  // Init
-  constructor() {
-    super("Barrel", "barrel.png");
+  constructor(name, src) {
+    super(name, src)
     this.SetStats({
       [Stat.VIT]: 99,
       [Stat.DEX]: 99,

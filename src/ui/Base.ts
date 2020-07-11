@@ -1,5 +1,5 @@
-import { StaticsWindow, ClearActiveEnt } from './Statics'
-import { GroundWindow, ClearActiveMat } from './Ground'
+import { StaticsWindow } from './Statics'
+import { GroundWindow } from './Ground'
 import { InventoryWindow } from './Inventory'
 import { GearWindow } from './Equipment'
 import { StatsWindow } from './Stats'
@@ -20,8 +20,11 @@ for(let Key in Toolbars) {
   t_icons.appendChild(img)
   img.id = "s_" + Key
 }
+// Global Vars
+export let ActiveBrush = {
+  Type: 0, Elem: null, Id: 0,
+}, lastWindow = undefined
 // Create Article Item
-let lastWindow = undefined
 export function CreateArticle(TitleName: string,
   Bottom: string, Type: string) : HTMLElement {
   if(lastWindow) lastWindow.remove()
@@ -32,7 +35,6 @@ export function CreateArticle(TitleName: string,
   title.innerHTML = TitleName
   article.id = `a_${Type}`
   list.id = `bt_${Type}`
-  ClearActiveMat()
-  ClearActiveEnt()
+  ActiveBrush.Type = 0
   return list
 }

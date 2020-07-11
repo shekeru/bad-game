@@ -28,6 +28,15 @@ export class C_Base {
     this.respawnTime = 60
     this.alpha = 1
   }
+  SimpleDeath() {
+    this.alpha = 0.25
+    this.solid = false
+    setTimeout(() => {
+      this.solid = true
+      this.alpha = 1
+    }, this.respawnTime * 1000)
+    RenderInv(html('bt_inv'))
+  }
 }
 export class C_Entity extends C_Base {
   Gear: Gear; Stats: Stats; HP: number
@@ -44,7 +53,6 @@ export class C_Entity extends C_Base {
       if (isNaN(Number(Key)))
         this.Stats[Stat[Key]] = 1
     this.RefreshHP()
-    console.log(this.Gear)
   }
   // Add Entity Stats
   SetStats(NewStats: Stats) {
@@ -69,7 +77,7 @@ export class C_Entity extends C_Base {
     return HP;
   }
   EntityDeath() {
-    this.alpha = 0.15
+    this.alpha = 0.25
     this.solid = false
     setTimeout(() => {
       this.RefreshHP()

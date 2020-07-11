@@ -20,6 +20,10 @@ export let GroundMats = {
     hex: "#888c8d"
   }
 }
+// Dynamic Entities
+import { OakTree } from './entity/OakTree'
+import {TalkingBarrel} from './entity/TalkingBarrel';
+import {Chicken} from './entity/Chicken';
 // Layer1 Refs
 export let StaticMats = {
   1: {
@@ -28,11 +32,13 @@ export let StaticMats = {
   },
   2: {
     name: "Barrel",
-    src: "barrel.png"
+    src: "barrel.png",
+    Object: TalkingBarrel,
   },
   3: {
     name: "Chicken",
-    src: "chicken.png"
+    src: "chicken.png",
+    Object: Chicken,
   },
   4: {
     name: "Cow",
@@ -69,7 +75,20 @@ export let StaticMats = {
   12: {
     name: "Door Open",
     src: "door_open.png"
-  }
+  },
+  13: {
+    name: "Oak Tree",
+    src: "trees/oak.png",
+    Object: OakTree,
+  },
+  14: {
+    name: "Willow Tree",
+    src: "trees/willow.png"
+  },
+  15: {
+    name: "Maple Tree",
+    src: "trees/maple.png"
+  },
 }
 // Loading Images For Statics
 export var ImgRefs = {}
@@ -80,15 +99,16 @@ for(let Code in StaticMats) {
   ImgRefs[StaticMats[Code].src] =
     StaticMats[Code].img = img
 }
-// Dynamic Entities
-import {TalkingBarrel} from './entity/TalkingBarrel';
-import {Chicken} from './entity/Chicken';
-export let Dynamics = {
-  "14,1": new Chicken(),
-  "14,3": new Chicken(),
-  "17,1": new Chicken(),
-  "20,1": new Chicken(),
-  "22,3": new TalkingBarrel()
+export let Dynamics = {}
+// Add Static Ents to Dynamics
+import { Statics } from './data/Statics'
+for(let Key in Statics) {
+  let Ent = StaticMats[Statics[Key]]
+  if(Ent.Object) {
+    Dynamics[Key] = new
+      Ent.Object(Ent.name, Ent.src)
+    delete Statics[Key]
+  }
 }
 // Player
 import {PlayerStruct} from './entity/PlayerStruct';
