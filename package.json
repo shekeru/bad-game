@@ -1,7 +1,7 @@
 {
   "description": "A game, why not",
   "dependencies": {
-    "@tsed/common": "5.59.4",
+    "@tsed/common": "5.67.2",
     "@tsed/core": "5.59.4",
     "express": "4.17.1",
     "ts-loader": "^7.0.5"
